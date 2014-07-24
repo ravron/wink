@@ -140,7 +140,6 @@
 				A6CBAE8A19817B4500FF5CBD /* winkTests */,
 				A6CBAE5E19817B4500FF5CBD /* Frameworks */,
 				A6CBAE5D19817B4500FF5CBD /* Products */,
-				BF1752B31981A85600A67AAF /* GPUImage.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,6 +155,7 @@
 		A6CBAE5E19817B4500FF5CBD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF1752B31981A85600A67AAF /* GPUImage.xcodeproj */,
 				BF1752C81981A8C600A67AAF /* QuartzCore.framework */,
 				BF1752C61981A8C100A67AAF /* AVFoundation.framework */,
 				BF1752C41981A8BB00A67AAF /* OpenGLES.framework */,
@@ -494,6 +494,7 @@
 				GCC_PREFIX_HEADER = "wink/wink-Prefix.pch";
 				INFOPLIST_FILE = "wink/wink-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "./GPUImage/Source/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -507,6 +508,7 @@
 				GCC_PREFIX_HEADER = "wink/wink-Prefix.pch";
 				INFOPLIST_FILE = "wink/wink-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "./GPUImage/Source/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
