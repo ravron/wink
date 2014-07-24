@@ -8,8 +8,10 @@
 
 #import "WKDataViewController.h"
 
-@interface WKDataViewController ()
+#import "WKFlashModel.h"
 
+@interface WKDataViewController ()
+@property (strong, nonatomic) WKFlashModel *flashModel;
 @end
 
 @implementation WKDataViewController
@@ -29,11 +31,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+
   if (self.pageType == MKPageEncoder) {
     self.titleLabel.text = @"Encoding";
   } else {
     self.titleLabel.text = @"Receiving";
   }
+
+  self.flashModel = [[WKFlashModel alloc] init];
+  self.flashModel.enabled = YES;
 }
 
 @end

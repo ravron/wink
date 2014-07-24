@@ -25,6 +25,7 @@
 		A6CBAE9119817B4500FF5CBD /* winkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CBAE9019817B4500FF5CBD /* winkTests.m */; };
 		A6D65928198187D400C4B551 /* WKReceiverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D65927198187D400C4B551 /* WKReceiverViewController.m */; };
 		A6D6592B198187EB00C4B551 /* WKEncoderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */; };
+		BF1752B219817F9300A67AAF /* WKFlashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752B119817F9300A67AAF /* WKFlashModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		A6D65927198187D400C4B551 /* WKReceiverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKReceiverViewController.m; sourceTree = "<group>"; };
 		A6D65929198187EB00C4B551 /* WKEncoderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKEncoderViewController.h; sourceTree = "<group>"; };
 		A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKEncoderViewController.m; sourceTree = "<group>"; };
+		BF1752B019817F9300A67AAF /* WKFlashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashModel.h; sourceTree = "<group>"; };
+		BF1752B119817F9300A67AAF /* WKFlashModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +139,8 @@
 				A6CBAE7519817B4500FF5CBD /* WKDataViewController.m */,
 				A6CBAE7719817B4500FF5CBD /* WKModelController.h */,
 				A6CBAE7819817B4500FF5CBD /* WKModelController.m */,
+				BF1752B019817F9300A67AAF /* WKFlashModel.h */,
+				BF1752B119817F9300A67AAF /* WKFlashModel.m */,
 				A6CBAE7A19817B4500FF5CBD /* Main.storyboard */,
 				A6CBAE7D19817B4500FF5CBD /* Images.xcassets */,
 				A6CBAE6619817B4500FF5CBD /* Supporting Files */,
@@ -270,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF1752B219817F9300A67AAF /* WKFlashModel.m in Sources */,
 				A6CBAE7619817B4500FF5CBD /* WKDataViewController.m in Sources */,
 				A6D6592B198187EB00C4B551 /* WKEncoderViewController.m in Sources */,
 				A6CBAE7019817B4500FF5CBD /* WKAppDelegate.m in Sources */,
