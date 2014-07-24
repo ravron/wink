@@ -23,6 +23,8 @@
 		A6CBAE8719817B4500FF5CBD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CBAE6319817B4500FF5CBD /* UIKit.framework */; };
 		A6CBAE8F19817B4500FF5CBD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6CBAE8D19817B4500FF5CBD /* InfoPlist.strings */; };
 		A6CBAE9119817B4500FF5CBD /* winkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CBAE9019817B4500FF5CBD /* winkTests.m */; };
+		A6D65928198187D400C4B551 /* WKReceiverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D65927198187D400C4B551 /* WKReceiverViewController.m */; };
+		A6D6592B198187EB00C4B551 /* WKEncoderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,10 @@
 		A6CBAE8C19817B4500FF5CBD /* winkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "winkTests-Info.plist"; sourceTree = "<group>"; };
 		A6CBAE8E19817B4500FF5CBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A6CBAE9019817B4500FF5CBD /* winkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = winkTests.m; sourceTree = "<group>"; };
+		A6D65926198187D400C4B551 /* WKReceiverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKReceiverViewController.h; sourceTree = "<group>"; };
+		A6D65927198187D400C4B551 /* WKReceiverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKReceiverViewController.m; sourceTree = "<group>"; };
+		A6D65929198187EB00C4B551 /* WKEncoderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKEncoderViewController.h; sourceTree = "<group>"; };
+		A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKEncoderViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,10 @@
 				A6CBAE6F19817B4500FF5CBD /* WKAppDelegate.m */,
 				A6CBAE7119817B4500FF5CBD /* WKRootViewController.h */,
 				A6CBAE7219817B4500FF5CBD /* WKRootViewController.m */,
+				A6D65929198187EB00C4B551 /* WKEncoderViewController.h */,
+				A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */,
+				A6D65926198187D400C4B551 /* WKReceiverViewController.h */,
+				A6D65927198187D400C4B551 /* WKReceiverViewController.m */,
 				A6CBAE7419817B4500FF5CBD /* WKDataViewController.h */,
 				A6CBAE7519817B4500FF5CBD /* WKDataViewController.m */,
 				A6CBAE7719817B4500FF5CBD /* WKModelController.h */,
@@ -261,8 +271,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6CBAE7619817B4500FF5CBD /* WKDataViewController.m in Sources */,
+				A6D6592B198187EB00C4B551 /* WKEncoderViewController.m in Sources */,
 				A6CBAE7019817B4500FF5CBD /* WKAppDelegate.m in Sources */,
 				A6CBAE6C19817B4500FF5CBD /* main.m in Sources */,
+				A6D65928198187D400C4B551 /* WKReceiverViewController.m in Sources */,
 				A6CBAE7319817B4500FF5CBD /* WKRootViewController.m in Sources */,
 				A6CBAE7919817B4500FF5CBD /* WKModelController.m in Sources */,
 			);
@@ -469,6 +481,7 @@
 				A6CBAE9619817B4500FF5CBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A6CBAE9719817B4500FF5CBD /* Build configuration list for PBXNativeTarget "winkTests" */ = {
 			isa = XCConfigurationList;
@@ -477,6 +490,7 @@
 				A6CBAE9919817B4500FF5CBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

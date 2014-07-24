@@ -13,6 +13,5 @@
 @interface WKModelController : NSObject <UIPageViewControllerDataSource>
 
 - (WKDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
-- (NSUInteger)indexOfViewController:(WKDataViewController *)viewController;
 
 @end

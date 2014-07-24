@@ -9,6 +9,8 @@
 #import "WKModelController.h"
 
 #import "WKDataViewController.h"
+#import "WKEncoderViewController.h"
+#import "WKReceiverViewController.h"
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -20,67 +22,77 @@
  */
 
 @interface WKModelController()
-@property (readonly, strong, nonatomic) NSArray *pageData;
+@property (strong, nonatomic) WKEncoderViewController *encoderViewController;
+@property (strong, nonatomic) WKReceiverViewController *receiverViewController;
+@property (strong, nonatomic) NSArray *pageData;
 @end
 
 @implementation WKModelController
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
+  self = [super init];
+  if (self) {
     // Create the data model.
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    _pageData = [[dateFormatter monthSymbols] copy];
-    }
-    return self;
+    _pageData = [NSArray arrayWithObjects:[NSNumber numberWithInt:MKPageReceiver], [NSNumber numberWithInt:MKPageEncoder], nil];
+  }
+  return self;
 }
 
 - (WKDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
-{   
-    // Return the data view controller for the given index.
-    if (([self.pageData count] == 0) || (index >= [self.pageData count])) {
-        return nil;
-    }
-    
-    // Create a new view controller and pass suitable data.
-    WKDataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"WKDataViewController"];
-    dataViewController.dataObject = self.pageData[index];
-    return dataViewController;
+{
+  // Return the data view controller for the given index.
+  if ((self.pageData.count == 0) || (index >= self.pageData.count)) {
+    return nil;
+  }
+
+  if ((MKPageType)index == MKPageEncoder) {
+    return [self encoderViewControllerInStoryboard:storyboard];
+  }
+  return [self receiverViewControllerInStoryboard:storyboard];
 }
 
-- (NSUInteger)indexOfViewController:(WKDataViewController *)viewController
-{   
-     // Return the index of the given data view controller.
-     // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
-    return [self.pageData indexOfObject:viewController.dataObject];
+- (WKEncoderViewController *)encoderViewControllerInStoryboard:(UIStoryboard *)storyboard {
+  if (!_encoderViewController) {
+    _encoderViewController = [storyboard instantiateViewControllerWithIdentifier:@"WKEncoderViewController"];
+    _encoderViewController.pageType = MKPageEncoder;
+  }
+  return _encoderViewController;
+}
+
+- (WKReceiverViewController *)receiverViewControllerInStoryboard:(UIStoryboard *)storyboard {
+  if (!_receiverViewController) {
+    _receiverViewController = [storyboard instantiateViewControllerWithIdentifier:@"WKReceiverViewController"];
+    _receiverViewController.pageType = MKPageReceiver;
+  }
+  return _receiverViewController;
 }
 
 #pragma mark - Page View Controller Data Source
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    NSUInteger index = [self indexOfViewController:(WKDataViewController *)viewController];
-    if ((index == 0) || (index == NSNotFound)) {
-        return nil;
-    }
-    
-    index--;
-    return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
+  NSUInteger index = ((WKDataViewController *)viewController).pageType;
+  if ((index == 0) || (index == NSNotFound)) {
+    return nil;
+  }
+
+  index--;
+  return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSUInteger index = [self indexOfViewController:(WKDataViewController *)viewController];
-    if (index == NSNotFound) {
-        return nil;
-    }
-    
-    index++;
-    if (index == [self.pageData count]) {
-        return nil;
-    }
-    return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
+  NSUInteger index = ((WKDataViewController *)viewController).pageType;
+  if (index == NSNotFound) {
+    return nil;
+  }
+
+  index++;
+  if (index == [self.pageData count]) {
+    return nil;
+  }
+  return [self viewControllerAtIndex:index storyboard:viewController.storyboard];
 }
 
 @end
