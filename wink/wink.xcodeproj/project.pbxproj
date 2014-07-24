@@ -24,6 +24,9 @@
 		A6CBAE8F19817B4500FF5CBD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6CBAE8D19817B4500FF5CBD /* InfoPlist.strings */; };
 		A6CBAE9119817B4500FF5CBD /* winkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CBAE9019817B4500FF5CBD /* winkTests.m */; };
 		BF1752B219817F9300A67AAF /* WKFlashTransmitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752B119817F9300A67AAF /* WKFlashTransmitModel.m */; };
+		A6D65928198187D400C4B551 /* WKReceiverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D65927198187D400C4B551 /* WKReceiverViewController.m */; };
+		A6D6592B198187EB00C4B551 /* WKEncoderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */; };
+		BF1752B219817F9300A67AAF /* WKFlashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752B119817F9300A67AAF /* WKFlashModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +65,12 @@
 		A6CBAE9019817B4500FF5CBD /* winkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = winkTests.m; sourceTree = "<group>"; };
 		BF1752B019817F9300A67AAF /* WKFlashTransmitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashTransmitModel.h; sourceTree = "<group>"; };
 		BF1752B119817F9300A67AAF /* WKFlashTransmitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashTransmitModel.m; sourceTree = "<group>"; };
+		A6D65926198187D400C4B551 /* WKReceiverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKReceiverViewController.h; sourceTree = "<group>"; };
+		A6D65927198187D400C4B551 /* WKReceiverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKReceiverViewController.m; sourceTree = "<group>"; };
+		A6D65929198187EB00C4B551 /* WKEncoderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKEncoderViewController.h; sourceTree = "<group>"; };
+		A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKEncoderViewController.m; sourceTree = "<group>"; };
+		BF1752B019817F9300A67AAF /* WKFlashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashModel.h; sourceTree = "<group>"; };
+		BF1752B119817F9300A67AAF /* WKFlashModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +134,10 @@
 				A6CBAE6F19817B4500FF5CBD /* WKAppDelegate.m */,
 				A6CBAE7119817B4500FF5CBD /* WKRootViewController.h */,
 				A6CBAE7219817B4500FF5CBD /* WKRootViewController.m */,
+				A6D65929198187EB00C4B551 /* WKEncoderViewController.h */,
+				A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */,
+				A6D65926198187D400C4B551 /* WKReceiverViewController.h */,
+				A6D65927198187D400C4B551 /* WKReceiverViewController.m */,
 				A6CBAE7419817B4500FF5CBD /* WKDataViewController.h */,
 				A6CBAE7519817B4500FF5CBD /* WKDataViewController.m */,
 				A6CBAE7719817B4500FF5CBD /* WKModelController.h */,
@@ -267,8 +280,10 @@
 			files = (
 				BF1752B219817F9300A67AAF /* WKFlashTransmitModel.m in Sources */,
 				A6CBAE7619817B4500FF5CBD /* WKDataViewController.m in Sources */,
+				A6D6592B198187EB00C4B551 /* WKEncoderViewController.m in Sources */,
 				A6CBAE7019817B4500FF5CBD /* WKAppDelegate.m in Sources */,
 				A6CBAE6C19817B4500FF5CBD /* main.m in Sources */,
+				A6D65928198187D400C4B551 /* WKReceiverViewController.m in Sources */,
 				A6CBAE7319817B4500FF5CBD /* WKRootViewController.m in Sources */,
 				A6CBAE7919817B4500FF5CBD /* WKModelController.m in Sources */,
 			);

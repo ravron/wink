@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, MKPageType) {
+  MKPageReceiver,
+  MKPageEncoder
+};
+
 @interface WKDataViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet UILabel *dataLabel;
-@property (strong, nonatomic) id dataObject;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (nonatomic, assign) MKPageType pageType;
 
 @end
