@@ -23,10 +23,15 @@
 		A6CBAE8719817B4500FF5CBD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CBAE6319817B4500FF5CBD /* UIKit.framework */; };
 		A6CBAE8F19817B4500FF5CBD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6CBAE8D19817B4500FF5CBD /* InfoPlist.strings */; };
 		A6CBAE9119817B4500FF5CBD /* winkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CBAE9019817B4500FF5CBD /* winkTests.m */; };
-		BF1752B219817F9300A67AAF /* WKFlashTransmitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752B119817F9300A67AAF /* WKFlashTransmitModel.m */; };
 		A6D65928198187D400C4B551 /* WKReceiverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D65927198187D400C4B551 /* WKReceiverViewController.m */; };
 		A6D6592B198187EB00C4B551 /* WKEncoderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */; };
-		BF1752B219817F9300A67AAF /* WKFlashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752B119817F9300A67AAF /* WKFlashModel.m */; };
+		BF1752BF1981A89F00A67AAF /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1752BA1981A85600A67AAF /* libGPUImage.a */; };
+		BF1752C11981A8AF00A67AAF /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1752C01981A8AF00A67AAF /* CoreMedia.framework */; };
+		BF1752C31981A8B500A67AAF /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1752C21981A8B500A67AAF /* CoreVideo.framework */; };
+		BF1752C51981A8BB00A67AAF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1752C41981A8BB00A67AAF /* OpenGLES.framework */; };
+		BF1752C71981A8C100A67AAF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1752C61981A8C100A67AAF /* AVFoundation.framework */; };
+		BF1752C91981A8C600A67AAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1752C81981A8C600A67AAF /* QuartzCore.framework */; };
+		BF1752CC1981A90500A67AAF /* WKFlashTransmitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +41,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = A6CBAE5B19817B4500FF5CBD;
 			remoteInfo = wink;
+		};
+		BF1752B91981A85600A67AAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF1752B31981A85600A67AAF /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCF1A33414DDB1EC00852800;
+			remoteInfo = GPUImage;
+		};
+		BF1752BB1981A85600A67AAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF1752B31981A85600A67AAF /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCE209E51943F20C002FEED8;
+			remoteInfo = GPUImageFramework;
+		};
+		BF1752BD1981A88A00A67AAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF1752B31981A85600A67AAF /* GPUImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCF1A33314DDB1EC00852800;
+			remoteInfo = GPUImage;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -63,14 +89,18 @@
 		A6CBAE8C19817B4500FF5CBD /* winkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "winkTests-Info.plist"; sourceTree = "<group>"; };
 		A6CBAE8E19817B4500FF5CBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A6CBAE9019817B4500FF5CBD /* winkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = winkTests.m; sourceTree = "<group>"; };
-		BF1752B019817F9300A67AAF /* WKFlashTransmitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashTransmitModel.h; sourceTree = "<group>"; };
-		BF1752B119817F9300A67AAF /* WKFlashTransmitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashTransmitModel.m; sourceTree = "<group>"; };
 		A6D65926198187D400C4B551 /* WKReceiverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKReceiverViewController.h; sourceTree = "<group>"; };
 		A6D65927198187D400C4B551 /* WKReceiverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKReceiverViewController.m; sourceTree = "<group>"; };
 		A6D65929198187EB00C4B551 /* WKEncoderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKEncoderViewController.h; sourceTree = "<group>"; };
 		A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKEncoderViewController.m; sourceTree = "<group>"; };
-		BF1752B019817F9300A67AAF /* WKFlashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashModel.h; sourceTree = "<group>"; };
-		BF1752B119817F9300A67AAF /* WKFlashModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashModel.m; sourceTree = "<group>"; };
+		BF1752B31981A85600A67AAF /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = GPUImage/GPUImage.xcodeproj; sourceTree = "<group>"; };
+		BF1752C01981A8AF00A67AAF /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BF1752C21981A8B500A67AAF /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		BF1752C41981A8BB00A67AAF /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		BF1752C61981A8C100A67AAF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BF1752C81981A8C600A67AAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BF1752CA1981A90500A67AAF /* WKFlashTransmitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashTransmitModel.h; sourceTree = "<group>"; };
+		BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashTransmitModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +108,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF1752C91981A8C600A67AAF /* QuartzCore.framework in Frameworks */,
+				BF1752C71981A8C100A67AAF /* AVFoundation.framework in Frameworks */,
+				BF1752C51981A8BB00A67AAF /* OpenGLES.framework in Frameworks */,
+				BF1752C31981A8B500A67AAF /* CoreVideo.framework in Frameworks */,
+				BF1752C11981A8AF00A67AAF /* CoreMedia.framework in Frameworks */,
 				A6CBAE6219817B4500FF5CBD /* CoreGraphics.framework in Frameworks */,
 				A6CBAE6419817B4500FF5CBD /* UIKit.framework in Frameworks */,
 				A6CBAE6019817B4500FF5CBD /* Foundation.framework in Frameworks */,
+				BF1752BF1981A89F00A67AAF /* libGPUImage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +140,7 @@
 				A6CBAE8A19817B4500FF5CBD /* winkTests */,
 				A6CBAE5E19817B4500FF5CBD /* Frameworks */,
 				A6CBAE5D19817B4500FF5CBD /* Products */,
+				BF1752B31981A85600A67AAF /* GPUImage.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +156,11 @@
 		A6CBAE5E19817B4500FF5CBD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BF1752C81981A8C600A67AAF /* QuartzCore.framework */,
+				BF1752C61981A8C100A67AAF /* AVFoundation.framework */,
+				BF1752C41981A8BB00A67AAF /* OpenGLES.framework */,
+				BF1752C21981A8B500A67AAF /* CoreVideo.framework */,
+				BF1752C01981A8AF00A67AAF /* CoreMedia.framework */,
 				A6CBAE5F19817B4500FF5CBD /* Foundation.framework */,
 				A6CBAE6119817B4500FF5CBD /* CoreGraphics.framework */,
 				A6CBAE6319817B4500FF5CBD /* UIKit.framework */,
@@ -142,8 +184,8 @@
 				A6CBAE7519817B4500FF5CBD /* WKDataViewController.m */,
 				A6CBAE7719817B4500FF5CBD /* WKModelController.h */,
 				A6CBAE7819817B4500FF5CBD /* WKModelController.m */,
-				BF1752B019817F9300A67AAF /* WKFlashTransmitModel.h */,
-				BF1752B119817F9300A67AAF /* WKFlashTransmitModel.m */,
+				BF1752CA1981A90500A67AAF /* WKFlashTransmitModel.h */,
+				BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */,
 				A6CBAE7A19817B4500FF5CBD /* Main.storyboard */,
 				A6CBAE7D19817B4500FF5CBD /* Images.xcassets */,
 				A6CBAE6619817B4500FF5CBD /* Supporting Files */,
@@ -180,6 +222,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BF1752B41981A85600A67AAF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF1752BA1981A85600A67AAF /* libGPUImage.a */,
+				BF1752BC1981A85600A67AAF /* GPUImage.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,6 +245,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BF1752BE1981A88A00A67AAF /* PBXTargetDependency */,
 			);
 			name = wink;
 			productName = wink;
@@ -244,6 +296,12 @@
 			mainGroup = A6CBAE5319817B4500FF5CBD;
 			productRefGroup = A6CBAE5D19817B4500FF5CBD /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BF1752B41981A85600A67AAF /* Products */;
+					ProjectRef = BF1752B31981A85600A67AAF /* GPUImage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A6CBAE5B19817B4500FF5CBD /* wink */,
@@ -251,6 +309,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BF1752BA1981A85600A67AAF /* libGPUImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGPUImage.a;
+			remoteRef = BF1752B91981A85600A67AAF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BF1752BC1981A85600A67AAF /* GPUImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GPUImage.framework;
+			remoteRef = BF1752BB1981A85600A67AAF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A6CBAE5A19817B4500FF5CBD /* Resources */ = {
@@ -278,11 +353,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF1752B219817F9300A67AAF /* WKFlashTransmitModel.m in Sources */,
 				A6CBAE7619817B4500FF5CBD /* WKDataViewController.m in Sources */,
 				A6D6592B198187EB00C4B551 /* WKEncoderViewController.m in Sources */,
 				A6CBAE7019817B4500FF5CBD /* WKAppDelegate.m in Sources */,
 				A6CBAE6C19817B4500FF5CBD /* main.m in Sources */,
+				BF1752CC1981A90500A67AAF /* WKFlashTransmitModel.m in Sources */,
 				A6D65928198187D400C4B551 /* WKReceiverViewController.m in Sources */,
 				A6CBAE7319817B4500FF5CBD /* WKRootViewController.m in Sources */,
 				A6CBAE7919817B4500FF5CBD /* WKModelController.m in Sources */,
@@ -304,6 +379,11 @@
 			isa = PBXTargetDependency;
 			target = A6CBAE5B19817B4500FF5CBD /* wink */;
 			targetProxy = A6CBAE8819817B4500FF5CBD /* PBXContainerItemProxy */;
+		};
+		BF1752BE1981A88A00A67AAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GPUImage;
+			targetProxy = BF1752BD1981A88A00A67AAF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
