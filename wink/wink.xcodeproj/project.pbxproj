@@ -23,7 +23,7 @@
 		A6CBAE8719817B4500FF5CBD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CBAE6319817B4500FF5CBD /* UIKit.framework */; };
 		A6CBAE8F19817B4500FF5CBD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6CBAE8D19817B4500FF5CBD /* InfoPlist.strings */; };
 		A6CBAE9119817B4500FF5CBD /* winkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CBAE9019817B4500FF5CBD /* winkTests.m */; };
-		BF1752B219817F9300A67AAF /* WKFlashModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752B119817F9300A67AAF /* WKFlashModel.m */; };
+		BF1752B219817F9300A67AAF /* WKFlashTransmitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752B119817F9300A67AAF /* WKFlashTransmitModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,8 +60,8 @@
 		A6CBAE8C19817B4500FF5CBD /* winkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "winkTests-Info.plist"; sourceTree = "<group>"; };
 		A6CBAE8E19817B4500FF5CBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A6CBAE9019817B4500FF5CBD /* winkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = winkTests.m; sourceTree = "<group>"; };
-		BF1752B019817F9300A67AAF /* WKFlashModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashModel.h; sourceTree = "<group>"; };
-		BF1752B119817F9300A67AAF /* WKFlashModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashModel.m; sourceTree = "<group>"; };
+		BF1752B019817F9300A67AAF /* WKFlashTransmitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashTransmitModel.h; sourceTree = "<group>"; };
+		BF1752B119817F9300A67AAF /* WKFlashTransmitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashTransmitModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +129,8 @@
 				A6CBAE7519817B4500FF5CBD /* WKDataViewController.m */,
 				A6CBAE7719817B4500FF5CBD /* WKModelController.h */,
 				A6CBAE7819817B4500FF5CBD /* WKModelController.m */,
-				BF1752B019817F9300A67AAF /* WKFlashModel.h */,
-				BF1752B119817F9300A67AAF /* WKFlashModel.m */,
+				BF1752B019817F9300A67AAF /* WKFlashTransmitModel.h */,
+				BF1752B119817F9300A67AAF /* WKFlashTransmitModel.m */,
 				A6CBAE7A19817B4500FF5CBD /* Main.storyboard */,
 				A6CBAE7D19817B4500FF5CBD /* Images.xcassets */,
 				A6CBAE6619817B4500FF5CBD /* Supporting Files */,
@@ -265,7 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF1752B219817F9300A67AAF /* WKFlashModel.m in Sources */,
+				BF1752B219817F9300A67AAF /* WKFlashTransmitModel.m in Sources */,
 				A6CBAE7619817B4500FF5CBD /* WKDataViewController.m in Sources */,
 				A6CBAE7019817B4500FF5CBD /* WKAppDelegate.m in Sources */,
 				A6CBAE6C19817B4500FF5CBD /* main.m in Sources */,

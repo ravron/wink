@@ -8,10 +8,10 @@
 
 #import "WKDataViewController.h"
 
-#import "WKFlashModel.h"
+#import "WKFlashTransmitModel.h"
 
 @interface WKDataViewController ()
-@property (strong, nonatomic) WKFlashModel *flashModel;
+@property (strong, nonatomic) WKFlashTransmitModel *flashModel;
 @end
 
 @implementation WKDataViewController
@@ -33,8 +33,10 @@
   [super viewWillAppear:animated];
   self.dataLabel.text = [self.dataObject description];
   
-  self.flashModel = [[WKFlashModel alloc] init];
-  self.flashModel.enabled = YES;
+  self.flashModel = [[WKFlashTransmitModel alloc] init];
+  
+  [self.flashModel enqueueMessage:@"a" mode:WKFlashTransmitModelModeSerial];
+  [self.flashModel transmitEnqueuedMessage];
 }
 
 @end
