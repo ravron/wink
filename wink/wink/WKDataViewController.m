@@ -8,8 +8,10 @@
 
 #import "WKDataViewController.h"
 
-@interface WKDataViewController ()
+#import "WKFlashModel.h"
 
+@interface WKDataViewController ()
+@property (strong, nonatomic) WKFlashModel *flashModel;
 @end
 
 @implementation WKDataViewController
@@ -28,8 +30,11 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    self.dataLabel.text = [self.dataObject description];
+  [super viewWillAppear:animated];
+  self.dataLabel.text = [self.dataObject description];
+  
+  self.flashModel = [[WKFlashModel alloc] init];
+  self.flashModel.enabled = YES;
 }
 
 @end
