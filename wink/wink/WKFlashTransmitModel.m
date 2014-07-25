@@ -110,18 +110,18 @@ static CMTime framePeriod;
 }
 
 - (void)_logSerialMessage {
-  NSMutableString *logString = [NSMutableString string];
+  self.logString = [NSMutableString string];
   for (NSInteger i = 0; i < self.bitQueue.count; i++) {
     if (i != 0 && (i % 10) == 0) {
       if (i % 40 == 0) {
-        NSLog(@"%@", logString);
+        NSLog(@"%@", self.logString);
       } else {
-        [logString appendString:@" "];
+        [self.logString appendString:@" "];
       }
     }
-    [logString appendString:([self.bitQueue[i] boolValue] ? @"1" : @"0")];
+    [self.logString appendString:([self.bitQueue[i] boolValue] ? @"1" : @"0")];
   }
-  NSLog(@"%@", logString);
+  NSLog(@"%@", self.logString);
 }
 
 #pragma mark Transmission
@@ -136,7 +136,7 @@ static CMTime framePeriod;
   
   
   id<WKFlashTransmitModelDelegate> delegate = self.delegate;
-  [delegate torchDidUpdate:![self.bitQueue[self.transmissionIndex] boolValue]];
+  [delegate torchDidUpdate:![self.bitQueue[self.transmissionIndex] boolValue] atIndex:self.transmissionIndex];
   
   self.transmissionIndex++;
 }

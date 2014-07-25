@@ -19,13 +19,14 @@ typedef NS_ENUM(NSUInteger, WKFlashTransmitModelMode) {
 
 @protocol WKFlashTransmitModelDelegate <NSObject>
 
-- (void)torchDidUpdate:(BOOL)on;
+- (void)torchDidUpdate:(BOOL)on atIndex:(NSUInteger)index;
 
 @end
 
 @interface WKFlashTransmitModel : NSObject
 @property (readonly, nonatomic, getter = isTransmitting) BOOL transmitting;
 @property (weak, nonatomic) id<WKFlashTransmitModelDelegate> delegate;
+@property (strong, nonatomic) NSMutableString *logString;
 
 + (CGFloat)torchTogglePeriod;
 + (NSInteger)samplesPerBit;
