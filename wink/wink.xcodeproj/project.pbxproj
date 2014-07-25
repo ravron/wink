@@ -34,6 +34,16 @@
 		BF1752C71981A8C100A67AAF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1752C61981A8C100A67AAF /* AVFoundation.framework */; };
 		BF1752C91981A8C600A67AAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1752C81981A8C600A67AAF /* QuartzCore.framework */; };
 		BF1752CC1981A90500A67AAF /* WKFlashTransmitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */; };
+		BF1752CF1982125800A67AAF /* WKFlashReceiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752CE1982125800A67AAF /* WKFlashReceiveModel.m */; };
+		BF1752D11982327B00A67AAF /* WKFlashReceiveModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752D01982327B00A67AAF /* WKFlashReceiveModelTest.m */; };
+		BF1752D21982328400A67AAF /* WKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CBAE6F19817B4500FF5CBD /* WKAppDelegate.m */; };
+		BF1752D31982328700A67AAF /* WKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CBAE7219817B4500FF5CBD /* WKRootViewController.m */; };
+		BF1752D41982328900A67AAF /* WKEncoderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D6592A198187EB00C4B551 /* WKEncoderViewController.m */; };
+		BF1752D51982328C00A67AAF /* WKReceiverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D65927198187D400C4B551 /* WKReceiverViewController.m */; };
+		BF1752D61982328E00A67AAF /* WKDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CBAE7519817B4500FF5CBD /* WKDataViewController.m */; };
+		BF1752D71982329100A67AAF /* WKModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CBAE7819817B4500FF5CBD /* WKModelController.m */; };
+		BF1752D81982329400A67AAF /* WKFlashTransmitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */; };
+		BF1752D91982329700A67AAF /* WKFlashReceiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752CE1982125800A67AAF /* WKFlashReceiveModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +115,9 @@
 		BF1752C81981A8C600A67AAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BF1752CA1981A90500A67AAF /* WKFlashTransmitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashTransmitModel.h; sourceTree = "<group>"; };
 		BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashTransmitModel.m; sourceTree = "<group>"; };
+		BF1752CD1982125800A67AAF /* WKFlashReceiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashReceiveModel.h; sourceTree = "<group>"; };
+		BF1752CE1982125800A67AAF /* WKFlashReceiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashReceiveModel.m; sourceTree = "<group>"; };
+		BF1752D01982327B00A67AAF /* WKFlashReceiveModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashReceiveModelTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +203,8 @@
 				A6CBAE7819817B4500FF5CBD /* WKModelController.m */,
 				BF1752CA1981A90500A67AAF /* WKFlashTransmitModel.h */,
 				BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */,
+				BF1752CD1982125800A67AAF /* WKFlashReceiveModel.h */,
+				BF1752CE1982125800A67AAF /* WKFlashReceiveModel.m */,
 				A6CBAE7A19817B4500FF5CBD /* Main.storyboard */,
 				A627401519822CDE00E4B02A /* flashlight.png */,
 				A62740111982295900E4B02A /* sun.png */,
@@ -215,6 +230,7 @@
 			children = (
 				A6CBAE9019817B4500FF5CBD /* winkTests.m */,
 				A6CBAE8B19817B4500FF5CBD /* Supporting Files */,
+				BF1752D01982327B00A67AAF /* WKFlashReceiveModelTest.m */,
 			);
 			path = winkTests;
 			sourceTree = "<group>";
@@ -369,6 +385,7 @@
 				A6D65928198187D400C4B551 /* WKReceiverViewController.m in Sources */,
 				A6CBAE7319817B4500FF5CBD /* WKRootViewController.m in Sources */,
 				A6CBAE7919817B4500FF5CBD /* WKModelController.m in Sources */,
+				BF1752CF1982125800A67AAF /* WKFlashReceiveModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +393,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF1752D11982327B00A67AAF /* WKFlashReceiveModelTest.m in Sources */,
+				BF1752D21982328400A67AAF /* WKAppDelegate.m in Sources */,
+				BF1752D81982329400A67AAF /* WKFlashTransmitModel.m in Sources */,
+				BF1752D41982328900A67AAF /* WKEncoderViewController.m in Sources */,
+				BF1752D61982328E00A67AAF /* WKDataViewController.m in Sources */,
+				BF1752D51982328C00A67AAF /* WKReceiverViewController.m in Sources */,
+				BF1752D71982329100A67AAF /* WKModelController.m in Sources */,
+				BF1752D31982328700A67AAF /* WKRootViewController.m in Sources */,
+				BF1752D91982329700A67AAF /* WKFlashReceiveModel.m in Sources */,
 				A6CBAE9119817B4500FF5CBD /* winkTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,6 +567,7 @@
 				INFOPLIST_FILE = "winkTests/winkTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "./GPUImage/Source/**";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -559,6 +586,7 @@
 				INFOPLIST_FILE = "winkTests/winkTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "./GPUImage/Source/**";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;

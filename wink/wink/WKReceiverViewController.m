@@ -104,9 +104,9 @@
   [self.videoCamera removeAllTargets];
   [self.videoCamera addTarget:self.rawVideoView];
   GPUImageLuminanceThresholdFilter *luminanceFilter = [[GPUImageLuminanceThresholdFilter alloc] init];
-  luminanceFilter.threshold = .90;
+  luminanceFilter.threshold = .99;
   
-  GPUImageOpeningFilter *openingFilter = [[GPUImageOpeningFilter alloc] initWithRadius:4];
+//  GPUImageOpeningFilter *openingFilter = [[GPUImageOpeningFilter alloc] initWithRadius:4];
   
   GPUImageCropFilter *cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:self.zoomRect];
   
@@ -114,8 +114,7 @@
   
   [self.videoCamera addTarget:cropFilter];
   [cropFilter addTarget:luminanceFilter];
-  [luminanceFilter addTarget:openingFilter];
-  [openingFilter addTarget:self.filteredVideoView];
+  [luminanceFilter addTarget:self.filteredVideoView];
   
 //  [luminanceFilter addTarget:differenceBlend];
 //  [openingFilter addTarget:differenceBlend];

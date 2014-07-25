@@ -10,9 +10,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-static const CGFloat kDebugSlowdownFactor = 1;
-static const CGFloat kTorchTogglePeriod = 0.05 * kDebugSlowdownFactor;
-
 @interface WKFlashTransmitModel ()
 @property (readonly, nonatomic) AVCaptureDevice *captureDevice;
 @property (strong, nonatomic) dispatch_source_t timer;
@@ -143,7 +140,7 @@ static const CGFloat kTorchTogglePeriod = 0.05 * kDebugSlowdownFactor;
 - (NSString *)_stripNonAscii:(NSString *)dirty {
   NSMutableString *asciiChars = [NSMutableString string];
   for (NSInteger i = 32; i < 127; i++) {
-    [asciiChars appendFormat:@"%c", i];
+    [asciiChars appendFormat:@"%ld", (long)i];
   }
   
   NSCharacterSet *nonAsciiCharSet = [[NSCharacterSet characterSetWithCharactersInString:asciiChars] invertedSet];
