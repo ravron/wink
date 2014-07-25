@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A62740121982295900E4B02A /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = A62740111982295900E4B02A /* sun.png */; };
+		A627401619822CDE00E4B02A /* flashlight.png in Resources */ = {isa = PBXBuildFile; fileRef = A627401519822CDE00E4B02A /* flashlight.png */; };
 		A6CBAE6019817B4500FF5CBD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CBAE5F19817B4500FF5CBD /* Foundation.framework */; };
 		A6CBAE6219817B4500FF5CBD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CBAE6119817B4500FF5CBD /* CoreGraphics.framework */; };
 		A6CBAE6419817B4500FF5CBD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CBAE6319817B4500FF5CBD /* UIKit.framework */; };
@@ -66,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A62740111982295900E4B02A /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sun.png; sourceTree = "<group>"; };
+		A627401519822CDE00E4B02A /* flashlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flashlight.png; sourceTree = "<group>"; };
 		A6CBAE5C19817B4500FF5CBD /* wink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6CBAE5F19817B4500FF5CBD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A6CBAE6119817B4500FF5CBD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -187,6 +191,8 @@
 				BF1752CA1981A90500A67AAF /* WKFlashTransmitModel.h */,
 				BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */,
 				A6CBAE7A19817B4500FF5CBD /* Main.storyboard */,
+				A627401519822CDE00E4B02A /* flashlight.png */,
+				A62740111982295900E4B02A /* sun.png */,
 				A6CBAE7D19817B4500FF5CBD /* Images.xcassets */,
 				A6CBAE6619817B4500FF5CBD /* Supporting Files */,
 			);
@@ -332,7 +338,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A62740121982295900E4B02A /* sun.png in Resources */,
 				A6CBAE7E19817B4500FF5CBD /* Images.xcassets in Resources */,
+				A627401619822CDE00E4B02A /* flashlight.png in Resources */,
 				A6CBAE6A19817B4500FF5CBD /* InfoPlist.strings in Resources */,
 				A6CBAE7C19817B4500FF5CBD /* Main.storyboard in Resources */,
 			);

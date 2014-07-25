@@ -14,8 +14,9 @@
 @property (strong, nonatomic) GPUImageMovieWriter *movieWriter;
 @property (strong, nonatomic) GPUImageView *rawVideoView;
 @property (strong, nonatomic) GPUImageView *filteredVideoView;
-
 @property (assign, nonatomic) CGRect zoomRect;
+@property (assign, nonatomic) CMTime lastTime;
+@property (strong, nonatomic) NSMutableArray *timestamps;
 @end
 
 @implementation WKReceiverViewController
@@ -23,7 +24,10 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-
+  self.filterButton.layer.cornerRadius = 4.f;
+  self.startButton.layer.cornerRadius = 4.f;
+  
+  self.timestamps = [NSMutableArray array];
   self.zoomRect = CGRectMake(0.4, 0.4, 0.2, 0.2);
 
   self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
@@ -51,7 +55,7 @@
   
   UIView *targetView = [[UIView alloc] initWithFrame:targetRect];
   targetView.backgroundColor = [UIColor clearColor];
-  targetView.layer.borderColor = [UIColor redColor].CGColor;
+  targetView.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.8].CGColor;
   targetView.layer.borderWidth = 1.0f;
   
   [self.view addSubview:targetView];
@@ -79,6 +83,9 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
   [self.videoCamera stopCameraCapture];
+  for (NSString *string in self.timestamps) {
+    NSLog(@"%@", string);
+  }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -113,6 +120,32 @@
 //  [luminanceFilter addTarget:differenceBlend];
 //  [openingFilter addTarget:differenceBlend];
 //  [differenceBlend addTarget:filteredVideoView];
+  
+  GPUImageLuminosity *luminosity = [[GPUImageLuminosity alloc] init];
+  [openingFilter addTarget:luminosity];
+  
+  [luminosity setLuminosityProcessingFinishedBlock:^(CGFloat luminosity, CMTime frameTime) {
+    if (luminosity > 0.001) {
+      NSLog(@"ON");
+    } else {
+      NSLog(@"OFF");
+    }
+
+    [self.timestamps addObject:[NSString stringWithFormat:@"Luminosity is: %f at time: %f", luminosity, CMTimeGetSeconds(CMTimeSubtract(frameTime, self.lastTime))]];
+    self.lastTime = frameTime;
+  }];
+  
+//  GPUImageRawDataOutput *dataOutput = [[GPUImageRawDataOutput alloc] initWithImageSize:CGSizeMake(self.filteredVideoView.sizeInPixels.width, self.filteredVideoView.sizeInPixels.height) resultsInBGRAFormat:YES];
+//  [openingFilter addTarget:dataOutput];
+//  
+//  __unsafe_unretained GPUImageRawDataOutput *weakOutput = dataOutput;
+//  dataOutput setNewFrameAvailableBlock:^{
+//    [weakOutput lockFramebufferForReading];
+//    GPUImageLuminosity
+//    GLubyte *outputBytes = [weakOutput rawBytesForImage];
+//    NSInteger bytesPerRow = [weakOutput bytesPerRowInOutput];
+//    for (unsigned int y = 0; y < self.filteredVideoView.sizeInPixels.height; y++)
+//  }
 }
 
 - (void)_disableFilters {
@@ -123,6 +156,27 @@
   [cropFilter addTarget:self.filteredVideoView];
   [self.videoCamera addTarget:self.rawVideoView];
 }
+
+- (IBAction)filterButtonPressed:(UIButton *)sender {
+  if (sender.isSelected) {
+    sender.selected = NO;
+    [self _disableFilters];
+  } else {
+    sender.selected = YES;
+    [sender setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:0.6]];
+    [self _enableFilters];
+  }
+}
+
+- (IBAction)startButtonPressed:(UIButton *)sender {
+  if (sender.isSelected) {
+    sender.selected = NO;
+  } else {
+    sender.selected = YES;
+    [sender setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:0.6]];
+  }
+}
+
 
 - (IBAction)filterSwitchChanged:(UISwitch *)sender {
   if (sender.on) {

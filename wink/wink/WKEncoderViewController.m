@@ -18,11 +18,14 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
-  self.messageTextView.layer.cornerRadius = 2.0f;
+
   self.messageTextView.delegate = self;
+//  [self.messageTextView setContentInset:UIEdgeInsetsMake(10, 10, 10, 10)];
   
   self.doneButton.alpha  = 0.0;
+  self.transmitButton.layer.cornerRadius = 3.0f;
+  self.transmitButton.layer.borderColor = [UIColor whiteColor].CGColor;
+  self.transmitButton.layer.borderWidth = 1.0f;
   
   self.transmitModel = [[WKFlashTransmitModel alloc] init];
 }
