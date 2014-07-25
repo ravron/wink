@@ -34,7 +34,7 @@
   self = [super init];
   if (self) {
     // Create the data model.
-    _pageData = [NSArray arrayWithObjects:[NSNumber numberWithInt:MKPageReceiver], [NSNumber numberWithInt:MKPageEncoder], nil];
+    _pageData = [NSArray arrayWithObjects:[NSNumber numberWithInt:MKPageEncoder], [NSNumber numberWithInt:MKPageReceiver], nil];
   }
   return self;
 }
