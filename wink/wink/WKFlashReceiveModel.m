@@ -77,6 +77,7 @@ static const NSInteger kDataBitsPerFrame = 8;
       } else {
         self.samplesThisBit = 1;
         self.state = WKFlashReceiveStateStart;
+        NSLog(@"Start");
       }
       break;
       
@@ -86,6 +87,7 @@ static const NSInteger kDataBitsPerFrame = 8;
       if (self.samplesThisBit >= self.samplesPerBit) {
         self.samplesThisBit = 0;
         self.state = WKFlashReceiveStateData;
+        NSLog(@"Data");
         self.incomingBits = [NSMutableArray arrayWithCapacity:8];
       }
       break;
@@ -99,6 +101,7 @@ static const NSInteger kDataBitsPerFrame = 8;
         }
       } else if (self.samplesThisBit == self.samplesPerBit / 2) {
         [self.incomingBits addObject:[NSNumber numberWithBool:bit]];
+        NSLog(@"Bit");
       }
       break;
     
@@ -109,6 +112,7 @@ static const NSInteger kDataBitsPerFrame = 8;
         self.samplesThisBit = 0;
         self.state = WKFlashReceiveStateIdle;
         [self _parseBitArray];
+        NSLog(@"Stop");
       }
       break;
   }
@@ -132,7 +136,9 @@ static const NSInteger kDataBitsPerFrame = 8;
   [self.incomingMessage appendFormat:@"%c", c];
 
   id<WKFlashReceiveModelDelegate> delegate = self.delegate;
-  [delegate didReceiveMessage:self.currentMessage];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [delegate didReceiveMessage:self.currentMessage];
+  });
 }
 
 @end
