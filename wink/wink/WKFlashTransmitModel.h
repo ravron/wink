@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, WKFlashTransmitModelMode) {
   WKFlashTransmitModelModeMorse,
 };
 
-static const CGFloat kDebugSlowdownFactor = 15;
+static const CGFloat kDebugSlowdownFactor = 3;
 static const CGFloat kTorchTogglePeriod = (1.0/15.0) * kDebugSlowdownFactor;
 
 @protocol WKFlashTransmitModelDelegate <NSObject>

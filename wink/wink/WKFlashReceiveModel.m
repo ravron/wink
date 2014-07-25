@@ -89,14 +89,17 @@ static const NSInteger kDataBitsPerFrame = 8;
       
     case WKFlashReceiveStateStart:
       self.samplesThisBit++;
-      if (bit == YES)
-        self.state = WKFlashReceiveStateIdle;
       if (self.samplesThisBit >= self.samplesPerBit) {
         self.samplesThisBit = 0;
         self.state = WKFlashReceiveStateData;
         [self.bitHistory addObject:@"Data"];
         NSLog(@"Data");
         self.incomingBits = [NSMutableArray arrayWithCapacity:8];
+      } else if (self.samplesThisBit == self.samplesPerBit / 2) {
+        if (bit == YES) {
+          self.state = WKFlashReceiveStateIdle;
+          NSLog(@"Error Idle from start!");
+        }
       }
       break;
       
@@ -107,6 +110,7 @@ static const NSInteger kDataBitsPerFrame = 8;
         if (self.incomingBits.count > 0 && self.incomingBits.count % kDataBitsPerFrame == 0) {
           self.state = WKFlashReceiveStateStop;
           [self.bitHistory addObject:@"Stop"];
+          NSLog(@"Stop");
         }
       } else if (self.samplesThisBit == self.samplesPerBit / 2) {
         [self.incomingBits addObject:[NSNumber numberWithBool:bit]];
@@ -117,14 +121,16 @@ static const NSInteger kDataBitsPerFrame = 8;
     
     case WKFlashReceiveStateStop:
       self.samplesThisBit++;
-      if (bit == NO)
-        self.state = WKFlashReceiveStateIdle;
       if (self.samplesThisBit >= self.samplesPerBit) {
         self.samplesThisBit = 0;
         self.state = WKFlashReceiveStateIdle;
         [self.bitHistory addObject:@"Idle"];
         [self _parseBitArray];
-        NSLog(@"Stop");
+      } else if (self.samplesThisBit == self.samplesPerBit / 2) {
+        if (bit == NO) {
+          self.state = WKFlashReceiveStateIdle;
+          NSLog(@"Error Idle!");
+        }
       }
       break;
   }
