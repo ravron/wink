@@ -89,6 +89,19 @@ static CMTime framePeriod;
   }
 }
 
+- (NSString *)messageStringSeparatedBySpaces:(BOOL)separated {
+  if (!self.bitQueue) return nil;
+  
+  NSMutableString *messageString = [NSMutableString string];
+  for (NSInteger i = 0; i < self.bitQueue.count; i++) {
+    [messageString appendString:([self.bitQueue[i] boolValue] ? @"1" : @"0")];
+    if (separated && i != 0 && (i % 10) == 0) {
+      [messageString appendString:@" "];
+    }
+  }
+  return [[messageString copy] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
 #pragma mark - Private
 
 #pragma mark Enqueueing
@@ -106,23 +119,23 @@ static CMTime framePeriod;
   self.bitQueue = [self.stringProcessor compressAndSerializeMessage:message];
   self.mode = WKFlashTransmitModelModeSerial;
   
-  [self _logSerialMessage];
+  NSLog(@"%@", [self messageStringSeparatedBySpaces:YES]);
 }
 
-- (void)_logSerialMessage {
-  self.logString = [NSMutableString string];
-  for (NSInteger i = 0; i < self.bitQueue.count; i++) {
-    if (i != 0 && (i % 10) == 0) {
-      if (i % 40 == 0) {
-        NSLog(@"%@", self.logString);
-      } else {
-        [self.logString appendString:@" "];
-      }
-    }
-    [self.logString appendString:([self.bitQueue[i] boolValue] ? @"1" : @"0")];
-  }
-  NSLog(@"%@", self.logString);
-}
+//- (void)_logSerialMessage {
+//  self.logString = [NSMutableString string];
+//  for (NSInteger i = 0; i < self.bitQueue.count; i++) {
+//    if (i != 0 && (i % 10) == 0) {
+//      if (i % 40 == 0) {
+//        NSLog(@"%@", self.logString);
+//      } else {
+//        [self.logString appendString:@" "];
+//      }
+//    }
+//    [self.logString appendString:([self.bitQueue[i] boolValue] ? @"1" : @"0")];
+//  }
+//  NSLog(@"%@", self.logString);
+//}
 
 #pragma mark Transmission
 

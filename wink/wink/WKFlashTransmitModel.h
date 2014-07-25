@@ -26,10 +26,10 @@ typedef NS_ENUM(NSUInteger, WKFlashTransmitModelMode) {
 @interface WKFlashTransmitModel : NSObject
 @property (readonly, nonatomic, getter = isTransmitting) BOOL transmitting;
 @property (weak, nonatomic) id<WKFlashTransmitModelDelegate> delegate;
-@property (strong, nonatomic) NSMutableString *logString;
 
 + (CGFloat)torchTogglePeriod;
 + (NSInteger)samplesPerBit;
 - (void)enqueueMessage:(NSString *)message mode:(WKFlashTransmitModelMode)mode;
 - (void)transmitEnqueuedMessage;
+- (NSString *)messageStringSeparatedBySpaces:(BOOL)separated;
 @end

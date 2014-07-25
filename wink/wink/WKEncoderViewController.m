@@ -107,7 +107,7 @@
                                NSForegroundColorAttributeName: [UIColor whiteColor],
                                NSFontAttributeName: [UIFont systemFontOfSize:16.0],
                                };
-  NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:self.transmitModel.logString];
+  NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[self.transmitModel messageStringSeparatedBySpaces:YES]];
   [attributedText setAttributes:attributes range:NSMakeRange(0, attributedText.length)];
   self.encodedLabel.attributedText = attributedText;
 //  self.encodedLabel.text = self.transmitModel.logString;
