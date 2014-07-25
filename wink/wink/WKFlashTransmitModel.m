@@ -139,8 +139,8 @@
 
 - (NSString *)_stripNonAscii:(NSString *)dirty {
   NSMutableString *asciiChars = [NSMutableString string];
-  for (NSInteger i = 32; i < 127; i++) {
-    [asciiChars appendFormat:@"%ld", (long)i];
+  for (unsigned char i = 32; i < 127; i++) {
+    [asciiChars appendFormat:@"%c", i];
   }
   
   NSCharacterSet *nonAsciiCharSet = [[NSCharacterSet characterSetWithCharactersInString:asciiChars] invertedSet];
