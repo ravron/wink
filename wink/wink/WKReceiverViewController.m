@@ -12,6 +12,7 @@
 @interface WKReceiverViewController ()
 @property (strong, nonatomic) GPUImageVideoCamera *videoCamera;
 @property (strong, nonatomic) GPUImageMovieWriter *movieWriter;
+@property (strong, nonatomic) GPUImageView *filteredVideoView;
 @end
 
 @implementation WKReceiverViewController
@@ -20,14 +21,17 @@
 {
   [super viewDidLoad];
 
-  self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPresetLow cameraPosition:AVCaptureDevicePositionBack];
+  
+
+  self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
   self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
 
-  [self.videoCamera.inputCamera addObserver:self forKeyPath:@"adjustingExposure" options:NSKeyValueObservingOptionNew context:nil];
+//  [self.videoCamera.inputCamera addObserver:self forKeyPath:@"adjustingExposure" options:NSKeyValueObservingOptionNew context:nil];
 
-  GPUImageView *filteredVideoView = [[GPUImageView alloc] initWithFrame:self.view.bounds];
-  filteredVideoView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
-  [self.view addSubview:filteredVideoView];
+  self.filteredVideoView = [[GPUImageView alloc] initWithFrame:self.view.bounds];
+  self.filteredVideoView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+  [self.view addSubview:self.filteredVideoView];
+  [self.view sendSubviewToBack:self.filteredVideoView];
 
   GPUImageGrayscaleFilter *grayscaleFilter = [[GPUImageGrayscaleFilter alloc] init];
 
@@ -35,20 +39,42 @@
   exposureFilter.exposure = 0;
 
   GPUImageLuminanceThresholdFilter *luminanceFilter = [[GPUImageLuminanceThresholdFilter alloc] init];
-  luminanceFilter.threshold = 0.8;
+  luminanceFilter.threshold = .95;
+  
+  GPUImageHighPassFilter *highPassFilter = [[GPUImageHighPassFilter alloc] init];
+  highPassFilter.filterStrength = 0.5;
+
+  
+  AVCaptureConnection *captureConnection = [self.videoCamera videoCaptureConnection];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+  captureConnection.videoMinFrameDuration = CMTimeMake(1, 60);
+  captureConnection.videoMaxFrameDuration = CMTimeMake(1, 60);
+#pragma clang diagnostic pop
+  
+
+  
+//  AVCaptureDevice *captureDevice = self.videoCamera.inputCamera;
+//  [captureDevice lockForConfiguration:nil];
+//  captureDevice.activeVideoMaxFrameDuration = CMTimeMake(1, 60);
+//  captureDevice.activeVideoMinFrameDuration = CMTimeMake(1, 60);
+//  [captureDevice unlockForConfiguration];
 
 //  GPUImageAdaptiveThresholdFilter *luminanceFilter = [[GPUImageAdaptiveThresholdFilter alloc] init];
 
-  [self.videoCamera addTarget:grayscaleFilter];
-  [grayscaleFilter addTarget:exposureFilter];
-  [exposureFilter addTarget:luminanceFilter];
-  [luminanceFilter addTarget:filteredVideoView];
-//  [grayscaleFilter addTarget:exposureFilter];
-//  [exposureFilter addTarget:filteredVideoView];
+//  [self.videoCamera addTarget:highPassFilter];
+//  [highPassFilter addTarget:filteredVideoView];
+//  [self.videoCamera addTarget:luminanceFilter];
+//  [luminanceFilter addTarget:openingFilter];
+//  [openingFilter addTarget:filteredVideoView];
+//  [luminanceFilter addTarget:differenceBlend];
+//  [openingFilter addTarget:differenceBlend];
+//  [differenceBlend addTarget:filteredVideoView];
 
 //  [self.videoCamera addTarget:self.filter];
 //  [self.filter addTarget:filteredVideoView];
   [self.videoCamera startCameraCapture];
+  [self _disableFilters];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -63,4 +89,34 @@
   }
 }
 
+- (void)_enableFilters {
+  [self.videoCamera removeAllTargets];
+  GPUImageLuminanceThresholdFilter *luminanceFilter = [[GPUImageLuminanceThresholdFilter alloc] init];
+  luminanceFilter.threshold = .95;
+  
+  GPUImageOpeningFilter *openingFilter = [[GPUImageOpeningFilter alloc] initWithRadius:4];
+  
+  GPUImageDifferenceBlendFilter *differenceBlend = [[GPUImageDifferenceBlendFilter alloc] init];
+  
+  [self.videoCamera addTarget:luminanceFilter];
+  [luminanceFilter addTarget:openingFilter];
+  [openingFilter addTarget:self.filteredVideoView];
+  
+//  [luminanceFilter addTarget:differenceBlend];
+//  [openingFilter addTarget:differenceBlend];
+//  [differenceBlend addTarget:filteredVideoView];
+}
+
+- (void)_disableFilters {
+  [self.videoCamera removeAllTargets];
+  [self.videoCamera addTarget:self.filteredVideoView];
+}
+
+- (IBAction)filterSwitchChanged:(UISwitch *)sender {
+  if (sender.on) {
+    [self _enableFilters];
+  } else {
+    [self _disableFilters];
+  }
+}
 @end

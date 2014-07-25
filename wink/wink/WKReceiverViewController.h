@@ -9,5 +9,6 @@
 #import "WKDataViewController.h"
 
 @interface WKReceiverViewController : WKDataViewController
+- (IBAction)filterSwitchChanged:(UISwitch *)sender;
 
 @end

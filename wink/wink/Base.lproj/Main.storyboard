@@ -95,8 +95,19 @@
                                 <color key="textColor" red="0.43998148040000001" green="0.78088123649999996" blue="0.81133237089999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="807-um-j8W">
+                                <rect key="frame" x="20" y="429" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="filterSwitchChanged:" destination="bIe-a7-1r4" eventType="valueChanged" id="5mH-qe-RVX"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="807-um-j8W" firstAttribute="leading" secondItem="1lO-IQ-4VO" secondAttribute="leading" constant="20" id="60F-Jq-bBx"/>
+                            <constraint firstItem="u63-RI-a8i" firstAttribute="top" secondItem="807-um-j8W" secondAttribute="bottom" constant="20" id="Edw-tq-pnq"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="titleLabel" destination="a1v-6E-OL8" id="pp9-qg-8bG"/>
