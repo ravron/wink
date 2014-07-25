@@ -133,7 +133,7 @@ static const NSInteger kDataBitsPerFrame = 8;
 - (void)_parseBitArray {
   unsigned char c = 0;
   if (self.incomingBits.count != kDataBitsPerFrame) {
-    [NSException raise:@"Wrong number of bits:" format:@"%d", self.incomingBits.count];
+    [NSException raise:@"Wrong number of bits:" format:@"%lu", (unsigned long)self.incomingBits.count];
   }
   
   for (NSInteger i = 0; i < self.incomingBits.count; i++) {
