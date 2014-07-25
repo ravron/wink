@@ -82,14 +82,11 @@ static const NSInteger kDataBitsPerFrame = 8;
       
     case WKFlashReceiveStateStart:
       self.samplesThisBit++;
-      if (self.samplesThisBit >= self.samplesPerBit / 2) {
+      if (bit == YES) self.state = WKFlashReceiveStateIdle;
+      if (self.samplesThisBit >= self.samplesPerBit) {
         self.samplesThisBit = 0;
-        if (bit == YES) {
-          self.state = WKFlashReceiveStateIdle;
-        } else {
-          self.state = WKFlashReceiveStateData;
-          self.incomingBits = [NSMutableArray arrayWithCapacity:8];
-        }
+        self.state = WKFlashReceiveStateData;
+        self.incomingBits = [NSMutableArray arrayWithCapacity:8];
       }
       break;
       
