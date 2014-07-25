@@ -129,7 +129,10 @@
   
   if (_transmitting) {
     dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, kTorchTogglePeriod * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
-    dispatch_resume(self.timer);
+    [self _warmTorch];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      dispatch_resume(self.timer);
+    });
   } else {
     dispatch_suspend(self.timer);
     self.transmissionIndex = 0;
@@ -149,6 +152,15 @@
 }
 
 #pragma mark Torch
+
+- (void)_warmTorch {
+  if ([self.captureDevice isTorchModeSupported:AVCaptureTorchModeOn] && [self.captureDevice isTorchAvailable]) {
+    [self.captureDevice lockForConfiguration:nil];
+    [self.captureDevice setTorchModeOnWithLevel:0.01 error:nil];
+    [self.captureDevice setTorchMode:AVCaptureTorchModeOff];
+    [self.captureDevice unlockForConfiguration];
+  }
+}
 
 - (void)_toggleTorch {
   [self _setTorch:![self _torchOn]];
