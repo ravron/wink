@@ -8,7 +8,6 @@
 
 #import "WKEncoderViewController.h"
 
-#import "WKFlashTransmitModel.h"
 
 @interface WKEncoderViewController ()
 @property (strong, nonatomic) WKFlashTransmitModel *transmitModel;
@@ -28,6 +27,7 @@
   self.transmitButton.layer.borderWidth = 1.0f;
   
   self.transmitModel = [[WKFlashTransmitModel alloc] init];
+  self.transmitModel.delegate = self;
 }
 
 #pragma mark - Private
@@ -59,6 +59,14 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
   [self _showDoneButton:NO];
+}
+
+#pragma mark WKFlashTransmitModelDelegate
+
+- (void)torchDidUpdate:(BOOL)on {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    self.signalView.backgroundColor = on ? [UIColor greenColor] : [UIColor whiteColor];
+  });
 }
 
 @end

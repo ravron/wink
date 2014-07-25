@@ -8,10 +8,13 @@
 
 #import "WKDataViewController.h"
 
-@interface WKEncoderViewController : WKDataViewController <UITextViewDelegate>
+#import "WKFlashTransmitModel.h"
+
+@interface WKEncoderViewController : WKDataViewController <UITextViewDelegate, WKFlashTransmitModelDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *messageTextView;
 @property (weak, nonatomic) IBOutlet UIButton *transmitButton;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UIView *signalView;
 
 - (IBAction)doneButtonTouched:(id)sender;
 - (IBAction)transmitButtonTouched:(id)sender;

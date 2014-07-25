@@ -120,6 +120,10 @@
   
   [self _setTorch:![self.bitQueue[self.transmissionIndex] boolValue]];
   
+  
+  id<WKFlashTransmitModelDelegate> delegate = self.delegate;
+  [delegate torchDidUpdate:![self.bitQueue[self.transmissionIndex] boolValue]];
+  
   self.transmissionIndex++;
 }
 
@@ -128,9 +132,9 @@
   _transmitting = transmitting;
   
   if (_transmitting) {
-    dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, kTorchTogglePeriod * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
     [self _warmTorch];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, kTorchTogglePeriod * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
       dispatch_resume(self.timer);
     });
   } else {
