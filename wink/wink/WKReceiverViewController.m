@@ -135,13 +135,13 @@
   [luminosity setLuminosityProcessingFinishedBlock:^(CGFloat luminosity, CMTime frameTime) {
     if (luminosity > 0.1) {
       if (!self.lastSignal) {
-//        NSLog(@"YES");
+        NSLog(@"YES");
       }
       self.lastSignal = YES;
       [self.receiveModel signalCalculated:YES];
     } else {
       if (self.lastSignal) {
-//        NSLog(@"NO");
+        NSLog(@"NO");
       }
       self.lastSignal = NO;
       [self.receiveModel signalCalculated:NO];
