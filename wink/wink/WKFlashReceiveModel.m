@@ -100,7 +100,7 @@ static const NSInteger kDataBitsPerFrame = 8;
         if (self.incomingBits.count > 0 && self.incomingBits.count % kDataBitsPerFrame == 0) {
           self.state = WKFlashReceiveStateStop;
         }
-      } else {
+      } else if (self.samplesThisBit == self.samplesPerBit / 2) {
         [self.incomingBits addObject:[NSNumber numberWithBool:bit]];
       }
       break;
