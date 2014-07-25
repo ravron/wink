@@ -10,6 +10,10 @@
 
 #import "WKFlashReceiveModel.h"
 
+@interface WKFlashReceiveModel (Test)
+@property (readonly, nonatomic) NSInteger samplesPerBit;
+@end
+
 @interface WKFlashReceiveModelTest : XCTestCase
 @property (strong, nonatomic) WKFlashReceiveModel *model;
 @end
@@ -36,8 +40,9 @@
                     @(YES), @(NO), @(YES), @(YES), @(YES), @(YES), @(YES), @(NO), @(YES), @(NO),
                     ];
   for (NSNumber *bit in data) {
-    [self.model signalCalculated:[bit boolValue]];
-    [self.model signalCalculated:[bit boolValue]];
+    for (NSInteger i = 0; i < self.model.samplesPerBit; i++) {
+      [self.model signalCalculated:[bit boolValue]];
+    }
   }
   XCTAssert([self.model.currentMessage isEqualToString:@"A"], @"Not equal to A!");
 }
