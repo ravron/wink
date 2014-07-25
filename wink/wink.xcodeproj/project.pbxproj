@@ -32,6 +32,7 @@
 		BF1752C71981A8C100A67AAF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1752C61981A8C100A67AAF /* AVFoundation.framework */; };
 		BF1752C91981A8C600A67AAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1752C81981A8C600A67AAF /* QuartzCore.framework */; };
 		BF1752CC1981A90500A67AAF /* WKFlashTransmitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */; };
+		BF1752CF1982125800A67AAF /* WKFlashReceiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752CE1982125800A67AAF /* WKFlashReceiveModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,8 @@
 		BF1752C81981A8C600A67AAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BF1752CA1981A90500A67AAF /* WKFlashTransmitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashTransmitModel.h; sourceTree = "<group>"; };
 		BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashTransmitModel.m; sourceTree = "<group>"; };
+		BF1752CD1982125800A67AAF /* WKFlashReceiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashReceiveModel.h; sourceTree = "<group>"; };
+		BF1752CE1982125800A67AAF /* WKFlashReceiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashReceiveModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +189,8 @@
 				A6CBAE7819817B4500FF5CBD /* WKModelController.m */,
 				BF1752CA1981A90500A67AAF /* WKFlashTransmitModel.h */,
 				BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */,
+				BF1752CD1982125800A67AAF /* WKFlashReceiveModel.h */,
+				BF1752CE1982125800A67AAF /* WKFlashReceiveModel.m */,
 				A6CBAE7A19817B4500FF5CBD /* Main.storyboard */,
 				A6CBAE7D19817B4500FF5CBD /* Images.xcassets */,
 				A6CBAE6619817B4500FF5CBD /* Supporting Files */,
@@ -361,6 +366,7 @@
 				A6D65928198187D400C4B551 /* WKReceiverViewController.m in Sources */,
 				A6CBAE7319817B4500FF5CBD /* WKRootViewController.m in Sources */,
 				A6CBAE7919817B4500FF5CBD /* WKModelController.m in Sources */,
+				BF1752CF1982125800A67AAF /* WKFlashReceiveModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
