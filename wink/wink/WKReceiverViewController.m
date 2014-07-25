@@ -12,7 +12,10 @@
 @interface WKReceiverViewController ()
 @property (strong, nonatomic) GPUImageVideoCamera *videoCamera;
 @property (strong, nonatomic) GPUImageMovieWriter *movieWriter;
+@property (strong, nonatomic) GPUImageView *rawVideoView;
 @property (strong, nonatomic) GPUImageView *filteredVideoView;
+
+@property (assign, nonatomic) CGRect zoomRect;
 @end
 
 @implementation WKReceiverViewController
@@ -21,29 +24,37 @@
 {
   [super viewDidLoad];
 
-  
+  self.zoomRect = CGRectMake(0.4, 0.4, 0.2, 0.2);
 
   self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
   self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
 
 //  [self.videoCamera.inputCamera addObserver:self forKeyPath:@"adjustingExposure" options:NSKeyValueObservingOptionNew context:nil];
-
-  self.filteredVideoView = [[GPUImageView alloc] initWithFrame:self.view.bounds];
+  
+  CGRect filteredRect = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height / 2);
+  CGRect rawRect = CGRectMake(0, self.view.bounds.size.height / 2, self.view.bounds.size.width, self.view.bounds.size.height / 2);
+  
+  self.filteredVideoView = [[GPUImageView alloc] initWithFrame:filteredRect];
   self.filteredVideoView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
   [self.view addSubview:self.filteredVideoView];
   [self.view sendSubviewToBack:self.filteredVideoView];
-
-  GPUImageGrayscaleFilter *grayscaleFilter = [[GPUImageGrayscaleFilter alloc] init];
-
-  GPUImageExposureFilter *exposureFilter = [[GPUImageExposureFilter alloc] init];
-  exposureFilter.exposure = 0;
-
-  GPUImageLuminanceThresholdFilter *luminanceFilter = [[GPUImageLuminanceThresholdFilter alloc] init];
-  luminanceFilter.threshold = .95;
   
-  GPUImageHighPassFilter *highPassFilter = [[GPUImageHighPassFilter alloc] init];
-  highPassFilter.filterStrength = 0.5;
-
+  self.rawVideoView = [[GPUImageView alloc] initWithFrame:rawRect];
+  self.rawVideoView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+  [self.view addSubview:self.rawVideoView];
+  [self.view sendSubviewToBack:self.rawVideoView];
+  
+  CGRect targetRect = CGRectMake(rawRect.origin.x + (self.zoomRect.origin.x * rawRect.size.width),
+                                 rawRect.origin.y + (self.zoomRect.origin.y * rawRect.size.height),
+                                 rawRect.size.width * self.zoomRect.size.width,
+                                 rawRect.size.height * self.zoomRect.size.height);
+  
+  UIView *targetView = [[UIView alloc] initWithFrame:targetRect];
+  targetView.backgroundColor = [UIColor clearColor];
+  targetView.layer.borderColor = [UIColor redColor].CGColor;
+  targetView.layer.borderWidth = 1.0f;
+  
+  [self.view addSubview:targetView];
   
   AVCaptureConnection *captureConnection = [self.videoCamera videoCaptureConnection];
 #pragma clang diagnostic push
@@ -51,28 +62,14 @@
   captureConnection.videoMinFrameDuration = CMTimeMake(1, 60);
   captureConnection.videoMaxFrameDuration = CMTimeMake(1, 60);
 #pragma clang diagnostic pop
-  
 
   
-//  AVCaptureDevice *captureDevice = self.videoCamera.inputCamera;
-//  [captureDevice lockForConfiguration:nil];
-//  captureDevice.activeVideoMaxFrameDuration = CMTimeMake(1, 60);
-//  captureDevice.activeVideoMinFrameDuration = CMTimeMake(1, 60);
-//  [captureDevice unlockForConfiguration];
+  AVCaptureDevice *captureDevice = self.videoCamera.inputCamera;
+  [captureDevice lockForConfiguration:nil];
+  captureDevice.videoZoomFactor = captureDevice.activeFormat.videoZoomFactorUpscaleThreshold;
+  [captureDevice unlockForConfiguration];
 
-//  GPUImageAdaptiveThresholdFilter *luminanceFilter = [[GPUImageAdaptiveThresholdFilter alloc] init];
-
-//  [self.videoCamera addTarget:highPassFilter];
-//  [highPassFilter addTarget:filteredVideoView];
-//  [self.videoCamera addTarget:luminanceFilter];
-//  [luminanceFilter addTarget:openingFilter];
-//  [openingFilter addTarget:filteredVideoView];
-//  [luminanceFilter addTarget:differenceBlend];
-//  [openingFilter addTarget:differenceBlend];
-//  [differenceBlend addTarget:filteredVideoView];
-
-//  [self.videoCamera addTarget:self.filter];
-//  [self.filter addTarget:filteredVideoView];
+  [self.videoCamera addTarget:self.rawVideoView];
   [self.videoCamera startCameraCapture];
   [self _disableFilters];
 }
@@ -91,14 +88,18 @@
 
 - (void)_enableFilters {
   [self.videoCamera removeAllTargets];
+  [self.videoCamera addTarget:self.rawVideoView];
   GPUImageLuminanceThresholdFilter *luminanceFilter = [[GPUImageLuminanceThresholdFilter alloc] init];
-  luminanceFilter.threshold = .95;
+  luminanceFilter.threshold = .90;
   
   GPUImageOpeningFilter *openingFilter = [[GPUImageOpeningFilter alloc] initWithRadius:4];
   
-  GPUImageDifferenceBlendFilter *differenceBlend = [[GPUImageDifferenceBlendFilter alloc] init];
+  GPUImageCropFilter *cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:self.zoomRect];
   
-  [self.videoCamera addTarget:luminanceFilter];
+//  GPUImageDifferenceBlendFilter *differenceBlend = [[GPUImageDifferenceBlendFilter alloc] init];
+  
+  [self.videoCamera addTarget:cropFilter];
+  [cropFilter addTarget:luminanceFilter];
   [luminanceFilter addTarget:openingFilter];
   [openingFilter addTarget:self.filteredVideoView];
   
@@ -109,7 +110,11 @@
 
 - (void)_disableFilters {
   [self.videoCamera removeAllTargets];
-  [self.videoCamera addTarget:self.filteredVideoView];
+  GPUImageCropFilter *cropFilter = [[GPUImageCropFilter alloc] initWithCropRegion:self.zoomRect];
+  
+  [self.videoCamera addTarget:cropFilter];
+  [cropFilter addTarget:self.filteredVideoView];
+  [self.videoCamera addTarget:self.rawVideoView];
 }
 
 - (IBAction)filterSwitchChanged:(UISwitch *)sender {
