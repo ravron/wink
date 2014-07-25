@@ -146,7 +146,7 @@
   [luminanceFilter addTarget:luminosity];
   
   [luminosity setLuminosityProcessingFinishedBlock:^(CGFloat luminosity, CMTime frameTime) {
-    if (luminosity > 0.05) {
+    if (luminosity > 0.03) {
       if (!self.lastSignal) {
         NSLog(@"YES");
       }
