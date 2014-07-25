@@ -7,6 +7,8 @@
 //
 
 #import "WKReceiverViewController.h"
+
+#import "WKFlashReceiveModel.h"
 #import "GPUImage.h"
 
 @interface WKReceiverViewController ()
@@ -17,6 +19,7 @@
 @property (assign, nonatomic) CGRect zoomRect;
 @property (assign, nonatomic) CMTime lastTime;
 @property (strong, nonatomic) NSMutableArray *timestamps;
+@property (strong, nonatomic) WKFlashReceiveModel *receiveModel;
 @end
 
 @implementation WKReceiverViewController
@@ -29,6 +32,8 @@
   
   self.timestamps = [NSMutableArray array];
   self.zoomRect = CGRectMake(0.4, 0.4, 0.2, 0.2);
+  
+  self.receiveModel = [[WKFlashReceiveModel alloc] init];
 
   self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
   self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
@@ -83,6 +88,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
   [self.videoCamera stopCameraCapture];
+  NSLog(@"%@", self.receiveModel.currentMessage);
   for (NSString *string in self.timestamps) {
     NSLog(@"%@", string);
   }
@@ -121,13 +127,13 @@
 //  [differenceBlend addTarget:filteredVideoView];
   
   GPUImageLuminosity *luminosity = [[GPUImageLuminosity alloc] init];
-  [openingFilter addTarget:luminosity];
+  [luminanceFilter addTarget:luminosity];
   
   [luminosity setLuminosityProcessingFinishedBlock:^(CGFloat luminosity, CMTime frameTime) {
-    if (luminosity > 0.001) {
-      NSLog(@"ON");
+    if (luminosity > 0.1) {
+      [self.receiveModel signalCalculated:YES];
     } else {
-      NSLog(@"OFF");
+      [self.receiveModel signalCalculated:NO];
     }
 
     [self.timestamps addObject:[NSString stringWithFormat:@"Luminosity is: %f at time: %f", luminosity, CMTimeGetSeconds(CMTimeSubtract(frameTime, self.lastTime))]];
@@ -173,6 +179,7 @@
   } else {
     sender.selected = YES;
     [sender setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:0.6]];
+    [self.receiveModel setEnabled:YES];
   }
 }
 
