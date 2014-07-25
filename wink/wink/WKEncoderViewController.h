@@ -8,6 +8,12 @@
 
 #import "WKDataViewController.h"
 
-@interface WKEncoderViewController : WKDataViewController
+@interface WKEncoderViewController : WKDataViewController <UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextView *messageTextView;
+@property (weak, nonatomic) IBOutlet UIButton *transmitButton;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+
+- (IBAction)doneButtonTouched:(id)sender;
+- (IBAction)transmitButtonTouched:(id)sender;
 
 @end

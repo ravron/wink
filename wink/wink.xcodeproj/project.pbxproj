@@ -494,6 +494,7 @@
 				GCC_PREFIX_HEADER = "wink/wink-Prefix.pch";
 				INFOPLIST_FILE = "wink/wink-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = "./GPUImage/Source/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -508,6 +509,7 @@
 				GCC_PREFIX_HEADER = "wink/wink-Prefix.pch";
 				INFOPLIST_FILE = "wink/wink-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = "./GPUImage/Source/**";
 				WRAPPER_EXTENSION = app;
 			};

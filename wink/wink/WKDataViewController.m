@@ -31,17 +31,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
-  self.flashModel = [[WKFlashTransmitModel alloc] init];
-  
-  [self.flashModel enqueueMessage:@"a" mode:WKFlashTransmitModelModeSerial];
-  [self.flashModel transmitEnqueuedMessage];
-
-  if (self.pageType == MKPageEncoder) {
-    self.titleLabel.text = @"Encoding";
-  } else {
-    self.titleLabel.text = @"Receiving";
-  }
 }
 
 @end
