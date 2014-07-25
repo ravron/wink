@@ -8,7 +8,6 @@
 
 #import "WKReceiverViewController.h"
 
-#import "WKFlashReceiveModel.h"
 #import "GPUImage.h"
 
 @interface WKReceiverViewController ()
@@ -20,6 +19,7 @@
 @property (assign, nonatomic) CMTime lastTime;
 @property (strong, nonatomic) NSMutableArray *timestamps;
 @property (strong, nonatomic) WKFlashReceiveModel *receiveModel;
+@property (strong, nonatomic) IBOutlet UITextView *messageTextView;
 @end
 
 @implementation WKReceiverViewController
@@ -32,8 +32,10 @@
   
   self.timestamps = [NSMutableArray array];
   self.zoomRect = CGRectMake(0.4, 0.4, 0.2, 0.2);
-  
+  self.messageTextView.hidden = YES;
+  self.messageTextView.textContainerInset = UIEdgeInsetsMake(20, 10, 10, 10);
   self.receiveModel = [[WKFlashReceiveModel alloc] init];
+  self.receiveModel.delegate = self;
 
   self.videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
   self.videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
@@ -165,6 +167,7 @@
 - (IBAction)filterButtonPressed:(UIButton *)sender {
   if (sender.isSelected) {
     sender.selected = NO;
+    [sender setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.4]];
     [self _disableFilters];
   } else {
     sender.selected = YES;
@@ -174,12 +177,15 @@
 }
 
 - (IBAction)startButtonPressed:(UIButton *)sender {
+  [self didReceiveMessage:@"hi"];
   if (sender.isSelected) {
     sender.selected = NO;
+    [sender setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.4]];
+    self.receiveModel.enabled = NO;
   } else {
     sender.selected = YES;
     [sender setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:0.6]];
-    [self.receiveModel setEnabled:YES];
+    self.receiveModel.enabled = YES;
   }
 }
 
@@ -191,4 +197,12 @@
     [self _disableFilters];
   }
 }
+
+#pragma mark WKFlashReceiveModelDelegate
+
+- (void)didReceiveMessage:(NSString *)message {
+  self.messageTextView.hidden = NO;
+  self.messageTextView.text = message;
+}
+
 @end

@@ -11,10 +11,15 @@
 #import "WKFlashTransmitModel.h"
 #import <AVFoundation/AVFoundation.h>
 
+@protocol WKFlashReceiveModelDelegate <NSObject>
+- (void)didReceiveMessage:(NSString *)message;
+@end
+
 @interface WKFlashReceiveModel : NSObject
 
 @property (assign, nonatomic, getter = isEnabled) BOOL enabled;
 @property (readonly, nonatomic) NSString *currentMessage;
+@property (weak, nonatomic) id<WKFlashReceiveModelDelegate> delegate;
 
 - (void)signalCalculated:(BOOL)on;
 

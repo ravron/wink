@@ -7,8 +7,9 @@
 //
 
 #import "WKDataViewController.h"
+#import "WKFlashReceiveModel.h"
 
-@interface WKReceiverViewController : WKDataViewController
+@interface WKReceiverViewController : WKDataViewController <WKFlashReceiveModelDelegate>
 - (IBAction)filterSwitchChanged:(UISwitch *)sender;
 @property (strong, nonatomic) IBOutlet UIButton *filterButton;
 @property (strong, nonatomic) IBOutlet UIButton *startButton;

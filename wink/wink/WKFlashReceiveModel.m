@@ -133,6 +133,9 @@ static const NSInteger kDataBitsPerFrame = 8;
   }
 
   [self.incomingMessage appendFormat:@"%c", c];
+
+  id<WKFlashReceiveModelDelegate> delegate = self.delegate;
+  [delegate didReceiveMessage:self.currentMessage];
 }
 
 @end
