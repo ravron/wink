@@ -8,11 +8,11 @@
 
 #import "WKFlashTransmitModel.h"
 
-#import <AVFoundation/AVFoundation.h>
 #import "WKReceiverViewController.h"
 
 static CGFloat torchTogglePeriod = 0;
 static const CGFloat samplesPerBit = 6.0;
+static CMTime framePeriod;
 
 @interface WKFlashTransmitModel ()
 @property (readonly, nonatomic) AVCaptureDevice *captureDevice;
@@ -33,10 +33,14 @@ static const CGFloat samplesPerBit = 6.0;
 
 + (CGFloat)torchTogglePeriod {
   if (torchTogglePeriod == 0) {
-    CMTime framePeriod = [WKReceiverViewController configureCameraForHighestFrameRate:[self captureDevice]];
+    framePeriod = [WKReceiverViewController configureCameraForHighestFrameRate:[self captureDevice]];
     torchTogglePeriod = CMTimeGetSeconds(framePeriod) * samplesPerBit;
   }
   return torchTogglePeriod;
+}
+
++ (NSInteger)samplesPerBit {
+  return (NSInteger)round(samplesPerBit);
 }
 
 + (AVCaptureDevice *)captureDevice {

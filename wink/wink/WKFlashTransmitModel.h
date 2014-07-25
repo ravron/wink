@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 typedef NS_ENUM(NSUInteger, WKFlashTransmitModelMode) {
   WKFlashTransmitModelModeSerial,
@@ -27,6 +28,7 @@ typedef NS_ENUM(NSUInteger, WKFlashTransmitModelMode) {
 @property (weak, nonatomic) id<WKFlashTransmitModelDelegate> delegate;
 
 + (CGFloat)torchTogglePeriod;
++ (NSInteger)samplesPerBit;
 - (void)enqueueMessage:(NSString *)message mode:(WKFlashTransmitModelMode)mode;
 - (void)transmitEnqueuedMessage;
 @end

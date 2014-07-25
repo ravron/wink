@@ -8,6 +8,7 @@
 
 #import "WKFlashReceiveModel.h"
 
+
 typedef NS_ENUM(NSUInteger, WKFlashReceiveState) {
   WKFlashReceiveStateDisabled,
   WKFlashReceiveStateIdle,
@@ -41,7 +42,7 @@ static const NSInteger kDataBitsPerFrame = 8;
 - (instancetype)initWithMode:(WKFlashTransmitModelMode)mode {
   if (self = [super init]) {
     _mode = mode;
-    _samplesPerBit = (NSInteger)round([WKFlashTransmitModel torchTogglePeriod] / (1.0 / 30.0));
+    _samplesPerBit = [WKFlashTransmitModel samplesPerBit];
     _state = WKFlashReceiveStateDisabled;
     _bitHistory = [NSMutableArray array];
   }
