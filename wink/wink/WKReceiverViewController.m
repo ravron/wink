@@ -70,8 +70,15 @@
   [captureDevice unlockForConfiguration];
 
   [self.videoCamera addTarget:self.rawVideoView];
-  [self.videoCamera startCameraCapture];
   [self _disableFilters];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [self.videoCamera startCameraCapture];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+  [self.videoCamera stopCameraCapture];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
