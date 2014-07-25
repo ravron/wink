@@ -44,6 +44,11 @@
 		BF1752D71982329100A67AAF /* WKModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CBAE7819817B4500FF5CBD /* WKModelController.m */; };
 		BF1752D81982329400A67AAF /* WKFlashTransmitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */; };
 		BF1752D91982329700A67AAF /* WKFlashReceiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752CE1982125800A67AAF /* WKFlashReceiveModel.m */; };
+		BF1752DF1982CCD300A67AAF /* smaz.c in Sources */ = {isa = PBXBuildFile; fileRef = BF1752DD1982CCD300A67AAF /* smaz.c */; };
+		BF1752E01982CCD300A67AAF /* smaz.c in Sources */ = {isa = PBXBuildFile; fileRef = BF1752DD1982CCD300A67AAF /* smaz.c */; };
+		BF1752E31982CFE700A67AAF /* WKStringCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752E21982CFE700A67AAF /* WKStringCompression.m */; };
+		BF1752E41982CFE700A67AAF /* WKStringCompression.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752E21982CFE700A67AAF /* WKStringCompression.m */; };
+		BF1752E61982D19C00A67AAF /* WKStringCompressionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1752E51982D19C00A67AAF /* WKStringCompressionTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +123,11 @@
 		BF1752CD1982125800A67AAF /* WKFlashReceiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKFlashReceiveModel.h; sourceTree = "<group>"; };
 		BF1752CE1982125800A67AAF /* WKFlashReceiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashReceiveModel.m; sourceTree = "<group>"; };
 		BF1752D01982327B00A67AAF /* WKFlashReceiveModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKFlashReceiveModelTest.m; sourceTree = "<group>"; };
+		BF1752DD1982CCD300A67AAF /* smaz.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = smaz.c; sourceTree = "<group>"; };
+		BF1752DE1982CCD300A67AAF /* smaz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smaz.h; sourceTree = "<group>"; };
+		BF1752E11982CFE700A67AAF /* WKStringCompression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKStringCompression.h; sourceTree = "<group>"; };
+		BF1752E21982CFE700A67AAF /* WKStringCompression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKStringCompression.m; sourceTree = "<group>"; };
+		BF1752E51982D19C00A67AAF /* WKStringCompressionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKStringCompressionTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +215,10 @@
 				BF1752CB1981A90500A67AAF /* WKFlashTransmitModel.m */,
 				BF1752CD1982125800A67AAF /* WKFlashReceiveModel.h */,
 				BF1752CE1982125800A67AAF /* WKFlashReceiveModel.m */,
+				BF1752E11982CFE700A67AAF /* WKStringCompression.h */,
+				BF1752E21982CFE700A67AAF /* WKStringCompression.m */,
+				BF1752DD1982CCD300A67AAF /* smaz.c */,
+				BF1752DE1982CCD300A67AAF /* smaz.h */,
 				A6CBAE7A19817B4500FF5CBD /* Main.storyboard */,
 				A627401519822CDE00E4B02A /* flashlight.png */,
 				A62740111982295900E4B02A /* sun.png */,
@@ -228,6 +242,7 @@
 		A6CBAE8A19817B4500FF5CBD /* winkTests */ = {
 			isa = PBXGroup;
 			children = (
+				BF1752E51982D19C00A67AAF /* WKStringCompressionTest.m */,
 				A6CBAE9019817B4500FF5CBD /* winkTests.m */,
 				A6CBAE8B19817B4500FF5CBD /* Supporting Files */,
 				BF1752D01982327B00A67AAF /* WKFlashReceiveModelTest.m */,
@@ -377,8 +392,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF1752DF1982CCD300A67AAF /* smaz.c in Sources */,
 				A6CBAE7619817B4500FF5CBD /* WKDataViewController.m in Sources */,
 				A6D6592B198187EB00C4B551 /* WKEncoderViewController.m in Sources */,
+				BF1752E31982CFE700A67AAF /* WKStringCompression.m in Sources */,
 				A6CBAE7019817B4500FF5CBD /* WKAppDelegate.m in Sources */,
 				A6CBAE6C19817B4500FF5CBD /* main.m in Sources */,
 				BF1752CC1981A90500A67AAF /* WKFlashTransmitModel.m in Sources */,
@@ -393,6 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF1752E01982CCD300A67AAF /* smaz.c in Sources */,
 				BF1752D11982327B00A67AAF /* WKFlashReceiveModelTest.m in Sources */,
 				BF1752D21982328400A67AAF /* WKAppDelegate.m in Sources */,
 				BF1752D81982329400A67AAF /* WKFlashTransmitModel.m in Sources */,
@@ -401,8 +419,10 @@
 				BF1752D51982328C00A67AAF /* WKReceiverViewController.m in Sources */,
 				BF1752D71982329100A67AAF /* WKModelController.m in Sources */,
 				BF1752D31982328700A67AAF /* WKRootViewController.m in Sources */,
+				BF1752E61982D19C00A67AAF /* WKStringCompressionTest.m in Sources */,
 				BF1752D91982329700A67AAF /* WKFlashReceiveModel.m in Sources */,
 				A6CBAE9119817B4500FF5CBD /* winkTests.m in Sources */,
+				BF1752E41982CFE700A67AAF /* WKStringCompression.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

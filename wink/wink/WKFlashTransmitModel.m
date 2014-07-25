@@ -9,6 +9,7 @@
 #import "WKFlashTransmitModel.h"
 
 #import "WKReceiverViewController.h"
+#import "WKStringCompression.h"
 
 static CGFloat torchTogglePeriod = 0;
 static const CGFloat samplesPerBit = 6.0;
@@ -73,9 +74,12 @@ static CMTime framePeriod;
 - (void)enqueueMessage:(NSString *)message mode:(WKFlashTransmitModelMode)mode {
   message = [self _stripNonAscii:message];
   
+  WKStringCompression *compressor = [[WKStringCompression alloc] init];
+  NSData *messageData = [compressor compressMessage:message];
+  
   switch (mode) {
     case WKFlashTransmitModelModeSerial:
-      [self _enqueueSerialMessage:message];
+      [self _enqueueSerialMessage:messageData];
       break;
       
     case WKFlashTransmitModelModeMorse:
@@ -90,6 +94,7 @@ static CMTime framePeriod;
 
 #pragma mark Enqueueing
 
+
 /* 
  Enqueue the message in serial format, like so:
  
@@ -98,8 +103,10 @@ static CMTime framePeriod;
  Where the initial NO is the start bit, the numerals are the bits of a character, 
  little-endian, and YES is the stop bit.
  */
-- (void)_enqueueSerialMessage:(NSString *)message {
+- (void)_enqueueSerialMessage:(NSData *)message {
   NSMutableArray *arr = [NSMutableArray arrayWithCapacity:[message length] * 10];
+  
+  
   for (NSInteger i = 0; i < [message length]; i++) {
     [arr addObject:[NSNumber numberWithBool:NO]];
     
