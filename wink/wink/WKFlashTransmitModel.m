@@ -12,7 +12,7 @@
 #import "WKStringProcessing.h"
 
 static CGFloat torchTogglePeriod = 0;
-static const CGFloat samplesPerBit = 3.0;
+static const CGFloat samplesPerBit = 4.0;
 static CMTime framePeriod;
 
 @interface WKFlashTransmitModel ()
