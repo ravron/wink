@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 
 #import "WKFlashReceiveModel.h"
+#import "WKStringProcessing.h"
 
 @interface WKFlashReceiveModel (Test)
 @property (readonly, nonatomic) NSInteger samplesPerBit;
@@ -16,6 +17,7 @@
 
 @interface WKFlashReceiveModelTest : XCTestCase
 @property (strong, nonatomic) WKFlashReceiveModel *model;
+@property (strong, nonatomic) WKStringProcessing *processor;
 @end
 
 @implementation WKFlashReceiveModelTest
@@ -25,6 +27,7 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
   self.model = [[WKFlashReceiveModel alloc] init];
+  self.processor = [[WKStringProcessing alloc] init];
 }
 
 - (void)tearDown
@@ -36,15 +39,16 @@
 - (void)testSignalCalc
 {
   self.model.enabled = YES;
-  NSArray *data = @[
-                    @(YES), @(NO), @(YES), @(YES), @(YES), @(YES), @(YES), @(NO), @(YES), @(NO),
-                    ];
+  NSString *testString = @"ABCdef";
+  // serial data for "A"
+  NSArray *data = [self.processor compressAndSerializeMessage:testString];
   for (NSNumber *bit in data) {
     for (NSInteger i = 0; i < self.model.samplesPerBit; i++) {
-      [self.model signalCalculated:[bit boolValue]];
+      [self.model signalCalculated:![bit boolValue]];
     }
   }
-  XCTAssert([self.model.currentMessage isEqualToString:@"A"], @"Not equal to A!");
+  self.model.enabled = NO;
+  XCTAssert([self.model.currentMessage isEqualToString:testString], @"Failed to calculate correct string");
 }
 
 @end

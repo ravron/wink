@@ -9,7 +9,7 @@
 #import "WKFlashTransmitModel.h"
 
 #import "WKReceiverViewController.h"
-#import "WKStringCompression.h"
+#import "WKStringProcessing.h"
 
 static CGFloat torchTogglePeriod = 0;
 static const CGFloat samplesPerBit = 6.0;
@@ -28,6 +28,7 @@ static CMTime framePeriod;
 @property (assign, nonatomic, getter = isTransmitting) BOOL transmitting;
 
 @property (assign, nonatomic) CGFloat torchTogglePeriod;
+@property (readonly, nonatomic) WKStringProcessing *stringProcessor;
 @end
 
 @implementation WKFlashTransmitModel
@@ -55,6 +56,7 @@ static CMTime framePeriod;
       [self _transmitBit];
     });
     _captureDevice = [[self class] captureDevice];
+    _stringProcessor = [[WKStringProcessing alloc] init];
   }
   return self;
 }
@@ -74,12 +76,9 @@ static CMTime framePeriod;
 - (void)enqueueMessage:(NSString *)message mode:(WKFlashTransmitModelMode)mode {
   message = [self _stripNonAscii:message];
   
-  WKStringCompression *compressor = [[WKStringCompression alloc] init];
-  NSData *messageData = [compressor compressMessage:message];
-  
   switch (mode) {
     case WKFlashTransmitModelModeSerial:
-      [self _enqueueSerialMessage:messageData];
+      [self _enqueueSerialMessage:message];
       break;
       
     case WKFlashTransmitModelModeMorse:
@@ -103,22 +102,8 @@ static CMTime framePeriod;
  Where the initial NO is the start bit, the numerals are the bits of a character, 
  little-endian, and YES is the stop bit.
  */
-- (void)_enqueueSerialMessage:(NSData *)message {
-  NSMutableArray *arr = [NSMutableArray arrayWithCapacity:[message length] * 10];
-  
-  
-  for (NSInteger i = 0; i < [message length]; i++) {
-    [arr addObject:[NSNumber numberWithBool:NO]];
-    
-    unichar c = [message characterAtIndex:i];
-    for (unsigned char mask = 1; mask > 0; mask = mask << 1) {
-      char bit = c & mask;
-      [arr addObject:[NSNumber numberWithBool:(bit ? YES : NO)]];
-    }
-    
-    [arr addObject:[NSNumber numberWithBool:YES]];
-  }
-  self.bitQueue = arr;
+- (void)_enqueueSerialMessage:(NSString *)message {
+  self.bitQueue = [self.stringProcessor compressAndSerializeMessage:message];
   self.mode = WKFlashTransmitModelModeSerial;
   
   [self _logSerialMessage];

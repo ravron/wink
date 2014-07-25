@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WKStringCompression : NSObject
+@interface WKStringProcessing : NSObject
+
+- (NSArray *)compressAndSerializeMessage:(NSString *)message;
+- (NSString *)deserializeAndDecompressData:(NSArray *)data;
 
 - (NSData *)compressMessage:(NSString *)message;
 - (NSString *)decompressMessage:(NSData *)compressed;
-
+- (NSArray *)serializeData:(NSData *)messageData;
+- (NSData *)deserializeData:(NSArray *)serialData;
 @end
