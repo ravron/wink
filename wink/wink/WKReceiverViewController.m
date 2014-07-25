@@ -16,8 +16,6 @@
 @property (strong, nonatomic) GPUImageView *rawVideoView;
 @property (strong, nonatomic) GPUImageView *filteredVideoView;
 @property (assign, nonatomic) CGRect zoomRect;
-@property (assign, nonatomic) CMTime lastTime;
-@property (strong, nonatomic) NSMutableArray *timestamps;
 @property (strong, nonatomic) WKFlashReceiveModel *receiveModel;
 @property (strong, nonatomic) IBOutlet UITextView *messageTextView;
 @property (assign, nonatomic) BOOL lastSignal;
@@ -53,7 +51,6 @@
   self.filterButton.layer.cornerRadius = 4.f;
   self.startButton.layer.cornerRadius = 4.f;
   
-  self.timestamps = [NSMutableArray array];
   self.zoomRect = CGRectMake(0.4, 0.4, 0.2, 0.2);
   self.messageTextView.hidden = YES;
   self.messageTextView.textContainerInset = UIEdgeInsetsMake(20, 10, 10, 10);
@@ -111,9 +108,6 @@
 - (void)viewDidDisappear:(BOOL)animated {
   [self.videoCamera stopCameraCapture];
   NSLog(@"%@", self.receiveModel.currentMessage);
-  for (NSString *string in self.timestamps) {
-    NSLog(@"%@", string);
-  }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -165,22 +159,7 @@
       self.lastSignal = NO;
       [self.receiveModel signalCalculated:NO];
     }
-
-    [self.timestamps addObject:[NSString stringWithFormat:@"Luminosity is: %f at time: %f", luminosity, CMTimeGetSeconds(CMTimeSubtract(frameTime, self.lastTime))]];
-    self.lastTime = frameTime;
   }];
-  
-//  GPUImageRawDataOutput *dataOutput = [[GPUImageRawDataOutput alloc] initWithImageSize:CGSizeMake(self.filteredVideoView.sizeInPixels.width, self.filteredVideoView.sizeInPixels.height) resultsInBGRAFormat:YES];
-//  [openingFilter addTarget:dataOutput];
-//  
-//  __unsafe_unretained GPUImageRawDataOutput *weakOutput = dataOutput;
-//  dataOutput setNewFrameAvailableBlock:^{
-//    [weakOutput lockFramebufferForReading];
-//    GPUImageLuminosity
-//    GLubyte *outputBytes = [weakOutput rawBytesForImage];
-//    NSInteger bytesPerRow = [weakOutput bytesPerRowInOutput];
-//    for (unsigned int y = 0; y < self.filteredVideoView.sizeInPixels.height; y++)
-//  }
 }
 
 - (void)_disableFilters {
