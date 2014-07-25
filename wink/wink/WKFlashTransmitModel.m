@@ -28,7 +28,6 @@
 - (instancetype)init {
   if (self = [super init]) {
     self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
-    dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, kTorchTogglePeriod * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
     dispatch_source_set_event_handler(self.timer, ^{
       [self _transmitBit];
     });
@@ -128,6 +127,7 @@
   _transmitting = transmitting;
   
   if (_transmitting) {
+    dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, kTorchTogglePeriod * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
     dispatch_resume(self.timer);
   } else {
     dispatch_suspend(self.timer);

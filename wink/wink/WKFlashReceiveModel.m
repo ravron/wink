@@ -29,6 +29,7 @@ static const NSInteger kDataBitsPerFrame = 8;
 
 @property (strong, nonatomic) NSMutableString *incomingMessage;
 @property (strong, nonatomic) NSMutableArray *incomingBits;
+@property (strong, nonatomic) NSMutableArray *bitHistory;
 @end
 
 @implementation WKFlashReceiveModel
@@ -42,6 +43,7 @@ static const NSInteger kDataBitsPerFrame = 8;
     _mode = mode;
     _samplesPerBit = (NSInteger)round(kTorchTogglePeriod / (1.0 / 30.0));
     _state = WKFlashReceiveStateDisabled;
+    _bitHistory = [NSMutableArray array];
   }
   return self;
 }
@@ -66,6 +68,9 @@ static const NSInteger kDataBitsPerFrame = 8;
 - (void)signalCalculated:(BOOL)on {
   if (self.state == WKFlashReceiveStateDisabled) return;
   BOOL bit = !on;
+  if (self.state != WKFlashReceiveStateIdle) {
+    [self.bitHistory addObject:[NSNumber numberWithBool:bit]];
+  }
   switch (self.state) {
     case WKFlashReceiveStateDisabled:
       return;
@@ -77,16 +82,19 @@ static const NSInteger kDataBitsPerFrame = 8;
       } else {
         self.samplesThisBit = 1;
         self.state = WKFlashReceiveStateStart;
+        [self.bitHistory addObject:@"Start"];
         NSLog(@"Start");
       }
       break;
       
     case WKFlashReceiveStateStart:
       self.samplesThisBit++;
-      if (bit == YES) self.state = WKFlashReceiveStateIdle;
+      if (bit == YES)
+        self.state = WKFlashReceiveStateIdle;
       if (self.samplesThisBit >= self.samplesPerBit) {
         self.samplesThisBit = 0;
         self.state = WKFlashReceiveStateData;
+        [self.bitHistory addObject:@"Data"];
         NSLog(@"Data");
         self.incomingBits = [NSMutableArray arrayWithCapacity:8];
       }
@@ -98,19 +106,23 @@ static const NSInteger kDataBitsPerFrame = 8;
         self.samplesThisBit = 0;
         if (self.incomingBits.count > 0 && self.incomingBits.count % kDataBitsPerFrame == 0) {
           self.state = WKFlashReceiveStateStop;
+          [self.bitHistory addObject:@"Stop"];
         }
       } else if (self.samplesThisBit == self.samplesPerBit / 2) {
         [self.incomingBits addObject:[NSNumber numberWithBool:bit]];
         NSLog(@"Bit");
+        [self.bitHistory addObject:@"Bit"];
       }
       break;
     
     case WKFlashReceiveStateStop:
       self.samplesThisBit++;
-      if (bit == NO) self.state = WKFlashReceiveStateIdle;
+      if (bit == NO)
+        self.state = WKFlashReceiveStateIdle;
       if (self.samplesThisBit >= self.samplesPerBit) {
         self.samplesThisBit = 0;
         self.state = WKFlashReceiveStateIdle;
+        [self.bitHistory addObject:@"Idle"];
         [self _parseBitArray];
         NSLog(@"Stop");
       }
