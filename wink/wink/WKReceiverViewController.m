@@ -177,7 +177,6 @@
 }
 
 - (IBAction)startButtonPressed:(UIButton *)sender {
-  [self didReceiveMessage:@"hi"];
   if (sender.isSelected) {
     sender.selected = NO;
     [sender setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.4]];
