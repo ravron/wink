@@ -527,6 +527,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wink/wink-Prefix.pch";
 				INFOPLIST_FILE = "wink/wink-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = "./GPUImage/Source/**";
@@ -542,6 +543,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wink/wink-Prefix.pch";
 				INFOPLIST_FILE = "wink/wink-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = "./GPUImage/Source/**";
@@ -565,6 +567,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "winkTests/winkTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				USER_HEADER_SEARCH_PATHS = "./GPUImage/Source/**";
@@ -584,6 +587,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wink/wink-Prefix.pch";
 				INFOPLIST_FILE = "winkTests/winkTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				USER_HEADER_SEARCH_PATHS = "./GPUImage/Source/**";

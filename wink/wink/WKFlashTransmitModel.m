@@ -12,7 +12,7 @@
 #import "WKReceiverViewController.h"
 
 static CGFloat torchTogglePeriod = 0;
-static const CGFloat samplesPerBit = 5.0;
+static const CGFloat samplesPerBit = 6.0;
 
 @interface WKFlashTransmitModel ()
 @property (readonly, nonatomic) AVCaptureDevice *captureDevice;
