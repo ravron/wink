@@ -9,6 +9,10 @@
 #import "WKFlashTransmitModel.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import "WKReceiverViewController.h"
+
+static CGFloat torchTogglePeriod = 0;
+static const CGFloat samplesPerBit = 5.0;
 
 @interface WKFlashTransmitModel ()
 @property (readonly, nonatomic) AVCaptureDevice *captureDevice;
@@ -21,9 +25,23 @@
 @property (assign, nonatomic) WKFlashTransmitModelMode mode;
 
 @property (assign, nonatomic, getter = isTransmitting) BOOL transmitting;
+
+@property (assign, nonatomic) CGFloat torchTogglePeriod;
 @end
 
 @implementation WKFlashTransmitModel
+
++ (CGFloat)torchTogglePeriod {
+  if (torchTogglePeriod == 0) {
+    CMTime framePeriod = [WKReceiverViewController configureCameraForHighestFrameRate:[self captureDevice]];
+    torchTogglePeriod = CMTimeGetSeconds(framePeriod) * samplesPerBit;
+  }
+  return torchTogglePeriod;
+}
+
++ (AVCaptureDevice *)captureDevice {
+  return [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+}
 
 - (instancetype)init {
   if (self = [super init]) {
@@ -31,7 +49,7 @@
     dispatch_source_set_event_handler(self.timer, ^{
       [self _transmitBit];
     });
-    _captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    _captureDevice = [[self class] captureDevice];
   }
   return self;
 }
@@ -134,7 +152,7 @@
   if (_transmitting) {
     [self _warmTorch];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-      dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, kTorchTogglePeriod * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+      dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, [[self class] torchTogglePeriod] * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
       dispatch_resume(self.timer);
     });
   } else {

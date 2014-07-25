@@ -41,7 +41,7 @@ static const NSInteger kDataBitsPerFrame = 8;
 - (instancetype)initWithMode:(WKFlashTransmitModelMode)mode {
   if (self = [super init]) {
     _mode = mode;
-    _samplesPerBit = (NSInteger)round(kTorchTogglePeriod / (1.0 / 30.0));
+    _samplesPerBit = (NSInteger)round([WKFlashTransmitModel torchTogglePeriod] / (1.0 / 30.0));
     _state = WKFlashReceiveStateDisabled;
     _bitHistory = [NSMutableArray array];
   }

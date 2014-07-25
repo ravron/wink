@@ -25,6 +25,28 @@
 
 @implementation WKReceiverViewController
 
++ (CMTime)configureCameraForHighestFrameRate:(AVCaptureDevice *)device {
+  AVCaptureDeviceFormat *bestFormat = nil;
+  AVFrameRateRange *bestFrameRateRange = nil;
+  for ( AVCaptureDeviceFormat *format in [device formats] ) {
+    for ( AVFrameRateRange *range in format.videoSupportedFrameRateRanges ) {
+      if ( range.maxFrameRate >= bestFrameRateRange.maxFrameRate ) {
+        bestFormat = format;
+        bestFrameRateRange = range;
+      }
+    }
+  }
+  if ( bestFormat ) {
+    if ( [device lockForConfiguration:nil] == YES ) {
+      device.activeFormat = bestFormat;
+      device.activeVideoMinFrameDuration = bestFrameRateRange.minFrameDuration;
+      device.activeVideoMaxFrameDuration = bestFrameRateRange.minFrameDuration;
+      [device unlockForConfiguration];
+    }
+  }
+  return bestFrameRateRange.minFrameDuration;
+}
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -68,18 +90,15 @@
   
   [self.view addSubview:targetView];
   
-  AVCaptureConnection *captureConnection = [self.videoCamera videoCaptureConnection];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  captureConnection.videoMinFrameDuration = CMTimeMake(1, 60);
-  captureConnection.videoMaxFrameDuration = CMTimeMake(1, 60);
-#pragma clang diagnostic pop
+//  AVCaptureConnection *captureConnection = [self.videoCamera videoCaptureConnection];
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+//  captureConnection.videoMinFrameDuration = CMTimeMake(1, 60);
+//  captureConnection.videoMaxFrameDuration = CMTimeMake(1, 60);
+//#pragma clang diagnostic pop
 
   
-  AVCaptureDevice *captureDevice = self.videoCamera.inputCamera;
-  [captureDevice lockForConfiguration:nil];
-  captureDevice.videoZoomFactor = captureDevice.activeFormat.videoZoomFactorUpscaleThreshold;
-  [captureDevice unlockForConfiguration];
+  [[self class] configureCameraForHighestFrameRate:self.videoCamera.inputCamera];
 
   [self.videoCamera addTarget:self.rawVideoView];
   [self _disableFilters];
