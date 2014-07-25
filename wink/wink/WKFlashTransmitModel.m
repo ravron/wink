@@ -10,7 +10,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-static const CGFloat kDebugSlowdownFactor = 20.0;
+static const CGFloat kDebugSlowdownFactor = 1;
 static const CGFloat kTorchTogglePeriod = 0.05 * kDebugSlowdownFactor;
 
 @interface WKFlashTransmitModel ()
@@ -52,6 +52,8 @@ static const CGFloat kTorchTogglePeriod = 0.05 * kDebugSlowdownFactor;
 }
 
 - (void)enqueueMessage:(NSString *)message mode:(WKFlashTransmitModelMode)mode {
+  message = [self _stripNonAscii:message];
+  
   switch (mode) {
     case WKFlashTransmitModelModeSerial:
       [self _enqueueSerialMessage:message];
@@ -134,6 +136,18 @@ static const CGFloat kTorchTogglePeriod = 0.05 * kDebugSlowdownFactor;
     dispatch_suspend(self.timer);
     self.transmissionIndex = 0;
   }
+}
+
+#pragma mark String cleaning
+
+- (NSString *)_stripNonAscii:(NSString *)dirty {
+  NSMutableString *asciiChars = [NSMutableString string];
+  for (NSInteger i = 32; i < 127; i++) {
+    [asciiChars appendFormat:@"%c", i];
+  }
+  
+  NSCharacterSet *nonAsciiCharSet = [[NSCharacterSet characterSetWithCharactersInString:asciiChars] invertedSet];
+  return [[dirty componentsSeparatedByCharactersInSet:nonAsciiCharSet] componentsJoinedByString:@""];
 }
 
 #pragma mark Torch
