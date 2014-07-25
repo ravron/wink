@@ -13,6 +13,9 @@
 
 @interface WKFlashReceiveModel : NSObject
 
-- (void)signalCalculated:(BOOL)on delta:(CMTime)delta;
+@property (assign, nonatomic, getter = isEnabled) BOOL enabled;
+@property (readonly, nonatomic) NSString *currentMessage;
+
+- (void)signalCalculated:(BOOL)on;
 
 @end
