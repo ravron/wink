@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSMutableArray *timestamps;
 @property (strong, nonatomic) WKFlashReceiveModel *receiveModel;
 @property (strong, nonatomic) IBOutlet UITextView *messageTextView;
+@property (assign, nonatomic) BOOL lastSignal;
 @end
 
 @implementation WKReceiverViewController
@@ -133,8 +134,16 @@
   
   [luminosity setLuminosityProcessingFinishedBlock:^(CGFloat luminosity, CMTime frameTime) {
     if (luminosity > 0.1) {
+      if (!self.lastSignal) {
+        NSLog(@"YES");
+      }
+      self.lastSignal = YES;
       [self.receiveModel signalCalculated:YES];
     } else {
+      if (self.lastSignal) {
+        NSLog(@"NO");
+      }
+      self.lastSignal = NO;
       [self.receiveModel signalCalculated:NO];
     }
 
